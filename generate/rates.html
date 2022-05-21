@@ -23,17 +23,17 @@
         // mining
         text = `${text}<br><br># mining`
         for (let i in data.mine) {
-            text = `${text}<br>## Lv. ${i}`
+            text = `${text}<br>## Lv. ${parseInt(i)+1}`
             for (let n in data.mine[i]) {
-                text = (`${text}<br>execute if score @s spmine.${data.mine[i][n].name} matches 1.. if score @s lvl.mine matches ${i} run scoreboard players operation @s lvl.mine.progress += mine.${i}.${data.mine[i][n].name} lvl.rates`);
+                text = (`${text}<br>execute if score @s spmine.${data.mine[i][n].name} matches 1.. if score @s lvl.mine matches ${parseInt(i)+1} run scoreboard players operation @s lvl.mine.progress += mine.${i+1}.${data.mine[i][n].name} lvl.rates`);
             }
         }
         // fishing
         text = `${text}<br><br># fishing`
         for (let i in data.fish) {
-            text = `${text}<br>## Lv. ${i}`
+            text = `${text}<br>## Lv. ${parseInt(i)+1}`
             for (let n in data.fish[i]) {
-                text = (`${text}<br>execute if score @s spfish.${data.fish[i][n].name} matches 1.. if score @s lvl.fish matches ${i} run scoreboard players operation @s lvl.fish.progress += fish.${i}.${data.fish[i][n].name} lvl.rates`);
+                text = (`${text}<br>execute if score @s spfish.${data.fish[i][n].name} matches 1.. if score @s lvl.fish matches ${parseInt(i)+1} run scoreboard players operation @s lvl.fish.progress += fish.${i+1}.${data.fish[i][n].name} lvl.rates`);
             }
         }
 
@@ -44,17 +44,17 @@
         // mining
         text2 = `${text2}<br><br># mining`
         for (let i in data.mine) {
-            text2 = `${text2}<br>## Lv. ${i}`
+            text2 = `${text2}<br>## Lv. ${parseInt(i)+1}`
             for (let n in data.mine[i]) {
-                text2 = (`${text2}<br>scoreboard players set mine.${i}.${data.mine[i][n].name} lvl.rates ${data.mine[i][n].amount}`);
+                text2 = (`${text2}<br>scoreboard players set mine.${parseInt(i)+1}.${data.mine[i][n].name} lvl.rates ${data.mine[i][n].amount}`);
             }
         }
         // fishing
         text2 = `${text2}<br><br># fishing`
         for (let i in data.fish) {
-            text2 = `${text2}<br>## Lv. ${i}`
+            text2 = `${text2}<br>## Lv. ${parseInt(i)+1}`
             for (let n in data.fish[i]) {
-                text2 = (`${text2}<br>scoreboard players set fish.${i}.${data.fish[i][n].name} lvl.rates ${data.fish[i][n].amount}`);
+                text2 = (`${text2}<br>scoreboard players set fish.${parseInt(i)+1}.${data.fish[i][n].name} lvl.rates ${data.fish[i][n].amount}`);
             }
         }
 
