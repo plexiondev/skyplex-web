@@ -4,3 +4,7 @@
 :root, body {
     --skyplex: 124;
 }
+
+code.no-icon:before {
+    display: none !important;
+}
