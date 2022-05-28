@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <head>
     <!-- meta info -->
-    <title translate="no">Skyplex</title>
-    <meta name="title" content="Welcome to Skyplex!">
+    <title translate="no">Leveling rates | Skyplex</title>
+    <meta name="title" content="Skyplex leveling rates">
     <meta name="description" content="A private Minecraft experience, powered with a custom datapack.">
     <meta name="keywords" content="skyplex, skyblock, plexion, plexion.dev, mc, minecraft, events, datapacks, datapack, void rising, lava rising, minecraft but, equton, troned, drnolife, zriv, plexion minecraft, plexion gaming, dev, development, osu!, cs:go, counter strike global offensive, resourcepacks, maps">
     <meta property="og:site_name" content="plexion">
@@ -13,8 +13,8 @@
     <meta property="twitter:site:id" content="@plexionlive">
     <meta property="twitter:creator" content="@plexionlive">
     <meta property="twitter:creator:id" content="@plexionlive">
-    <meta property="og:url" content="https://sky.plexion.dev">
-    <meta property="og:title" content="Welcome to Skyplex!">
+    <meta property="og:url" content="https://sky.plexion.dev/rates">
+    <meta property="og:title" content="Skyplex leveling rates">
     <meta property="og:description" content="A private Minecraft experience, powered with a custom datapack.">
     <meta property="og:image" content="https://sky.plexion.dev/img/jan21.png">
     <meta property="og:image:width" content="1200">
@@ -55,8 +55,8 @@
             <h1 translate="no">plexion</h1>
         </a>
         <span class="links">
-            <a href="/" class="focus" aria-label="Home"><i class="icon w-20" stroke-width="2.5" data-feather="home"></i><i class="text">Home<span class="bar"></span></i></a>
-            <a href="/rates" aria-label="Rates"><i class="icon w-20" stroke-width="2.5" data-feather="home"></i><i class="text">Rates<span class="bar"></span></i></a>
+            <a href="/" aria-label="Home"><i class="icon w-20" stroke-width="2.5" data-feather="home"></i><i class="text">Home<span class="bar"></span></i></a>
+            <a href="/rates" class="focus" aria-label="Rates"><i class="icon w-20" stroke-width="2.5" data-feather="home"></i><i class="text">Rates<span class="bar"></span></i></a>
         </span>
         <span class="menu">
             <span class="dropdown-wrap">
@@ -68,21 +68,13 @@
         <section class="min header padding center" style="padding-top: 130px; padding-bottom: 130px;">
             <div class="bg-dark lib-grad"></div>
             <span class="text big no-flex can-full">
-                <h1>Welcome to Skyplex!</h1>
-                <p class="text-18">A private Minecraft experience, powered with a custom datapack.</p>
-                <a role="button" class="button focus sheared small">
-                    <span class="content">Connect <code>mc.plexion.dev</code></span>
-                </a>
-                <a role="button" class="button sheared small" href="https://discord.com/channels/647916257013661698/648066193323851787" target="_blank">
-                    <span class="content">Discord</span>
-                </a>
+                <h1>Item leveling rates</h1>
+                <p class="text-18">Sourced from <a href="/generate/rates.json" target="_blank">rates.json</a></p>
             </span>
         </section>
     </div>
-    <section class="left header sep no-align" style="top: 0;">
-        <h4>More stuff coming soon</h4>
-        <p>Including tracking for all custom items, map locations(?), upcoming todo, announcements, and a way to track leveling rates.</p>
-    </section>
+    <div id="rates_append"></div>
+    <script src="/js/rates.js"></script>
     <footer id="footer"></footer>
     <script src="/js/footer.js"></script>
 </body>
