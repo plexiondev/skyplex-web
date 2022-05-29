@@ -1,9 +1,12 @@
 {
+    "trades": [
+        { "namespace": "mine_0", "name": "Miner" }
+    ],
     "mine": [
-        { "name": "cobblestone", "level": 1, "sell": 1, "quantity": 5 },
-        { "name": "coal_ore", "level": 2, "sell": 1, "quantity": 2 },
-        { "name": "iron_ore", "level": 3, "sell": 2, "quantity": 1 },
-        { "name": "gold_ore", "level": 3, "sell": 2, "quantity": 1 },
+        { "name": "cobblestone", "level": 1, "sell": 1, "quantity": 5, "trades": ["mine_0"] },
+        { "name": "coal_ore", "level": 2, "sell": 1, "quantity": 2, "trades": ["mine_0"] },
+        { "name": "iron_ore", "level": 3, "sell": 2, "quantity": 1, "trades": ["mine_0"] },
+        { "name": "gold_ore", "level": 3, "sell": 2, "quantity": 1, "trades": ["mine_0"] },
         { "name": "diamond_ore", "level": 4, "sell": 10, "quantity": 1 }
     ],
     "fish": [
