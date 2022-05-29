@@ -13,19 +13,17 @@ function get_rates() {
     $.get('/generate/rates.json',function(data) {
         for (let type in data) {
             create_type_category(type);
-            for (let n in data[`${type}`]) {
-                for (let i in data[`${type}`][n]) {
-                    let em_record = document.createElement('tr');
-                    em_record.innerHTML = (`
-                    <th class="level"><code>LVL ${parseInt(n)+1}</code></th>
-                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[`${type}`][n][i].name}.png"</div></th>
-                    <th class="name">${data[`${type}`][n][i].name}</th>
-                    <th class="values"><code class="on no-icon">+${data[`${type}`][n][i].amount}</code></th>
-                    `);
-    
-                    // append
-                    document.getElementById(`category.${type}.table`).appendChild(em_record);
-                }
+            for (let i in data[`${type}`]) {
+                let em_record = document.createElement('tr');
+                em_record.innerHTML = (`
+                <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[`${type}`][i].name}.png"</div></th>
+                <th class="name">${data[`${type}`][i].name}</th>
+                <th class="values"><code class="on no-icon">+${data[`${type}`][i].level}</code></th>
+                <th class="values"><code class="no-icon">$${data[`${type}`][i].sell}</code> <code>x${data[`${type}`][i].quantity}</code></th>
+                `);
+
+                // append
+                document.getElementById(`category.${type}.table`).appendChild(em_record);
             }
         }
     });
@@ -43,10 +41,10 @@ function create_type_category(type) {
         <table class="customising">
             <tbody id="category.${type}.table">
                 <tr>
-                    <th class="level">Level</th>
                     <th class="icon">Icon</th>
                     <th class="name">Name</th>
-                    <th class="values">Amount</th>
+                    <th class="values">Level</th>
+                    <th class="values">Sell</th>
                 </tr>
             </tbody>
         </table>
