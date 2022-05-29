@@ -27,15 +27,23 @@ function generate() {
 
     let trade = document.getElementById('trade').value;
 
-    let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${trade} Villager Spawn Egg","italic":false}'},EntityTag:{Offers:{Recipes:[ 1`;
+    let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${trade} Villager Spawn Egg","italic":false}'},EntityTag:{Offers:{Recipes:[`;
 
+    let count = 0;
     for (let n in data) {
         if (n != 'trades') {
             // not trades
+            let comma0 = '';
+            if (count != 0) { comma0 = ',' }
+            output = `${output}${comma0}`;
 
             for (let i in data[n]) {
-                output = `${output}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b}}`
+                let comma = '';
+                if (i != 0) { comma = ',' }
+                output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b}}`
             }
+
+            count += 1;
         }
     }
 
