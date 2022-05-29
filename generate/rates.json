@@ -1,28 +1,15 @@
 {
     "mine": [
-        [
-            { "name": "cobblestone", "amount": 1 },
-            { "name": "coal_ore", "amount": 2 },
-            { "name": "iron_ore", "amount": 3 }
-        ],
-        [
-            { "name": "cobblestone", "amount": 1 },
-            { "name": "coal_ore", "amount": 3 },
-            { "name": "iron_ore", "amount": 5 },
-            { "name": "gold_ore", "amount": 6 }
-        ]
+        { "name": "cobblestone", "level": 1, "sell": 1, "quantity": 5 },
+        { "name": "coal_ore", "level": 2, "sell": 1, "quantity": 2 },
+        { "name": "iron_ore", "level": 3, "sell": 2, "quantity": 1 },
+        { "name": "gold_ore", "level": 3, "sell": 2, "quantity": 1 },
+        { "name": "gold_ore", "level": 4, "sell": 10, "quantity": 1 }
     ],
     "fish": [
-        [
-            { "name": "catch", "amount": 1 }
-        ],
-        [
-            { "name": "catch", "amount": 3 }
-        ]
+        { "name": "catch", "level": 1, "sell": 0, "quantity": 0 }
     ],
     "farm": [
-        [
-            { "name": "wheat", "amount": 0 }
-        ]
+        { "name": "wheat", "level": 1, "sell": 0, "quantity": 0 }
     ]
 }
