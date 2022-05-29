@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://plexion.dev/css/reset.css">
+    <link rel="stylesheet" href="https://plexion.dev/css/style.css">
+
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Skyplex trades generate</title>
+</head>
+<body>
+    <section class="download-steps header-bar">
+        <span class="logo"></span>
+        <span class="right">
+            <select style="height: 46px; --top: 10px; margin: 10px;" id="trade"></select>
+            <a role="button" class="button focus sheared small" onclick="generate()">
+                <span class="content">Generate</span>
+            </a>
+        </span>
+    </section>
+    <div id="cont"></div>
+</body>
+<script src="/js/trades.js"></script>
