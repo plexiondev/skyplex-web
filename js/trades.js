@@ -78,9 +78,7 @@ function generate() {
                     let nbt_comma = '';
                     for (let x in data[n][i].item) {
                         // comma
-                        if (nbt_count >= 1) {
-                            nbt_comma = ',';
-                        }
+                        if (nbt_count >= 1) { nbt_comma = ','; } // not first item
 
                         if (x == 'custom_name') {
                             // custom name
@@ -92,9 +90,11 @@ function generate() {
 
                         nbt_count += 1;
                     }
+                    // write to nbt var
                     nbt_tag = `${nbt_tag}}`;
                     nbt = `${nbt_tag}`;
 
+                    // check for skyplex id
                     let skyplex_id = '';
                     try {
                         skyplex_id = data[n][i].item.skyplex_id;
@@ -129,7 +129,7 @@ function generate() {
         }
     }
 
-    // end
+    // display output
     output = `${output}]}}}`;
     document.getElementById('output').innerHTML = `${output}`;
 }
@@ -138,5 +138,6 @@ function generate() {
 function copy() {
     var selector = document.getElementById('output');
 
+    // write to clipboard
     navigator.clipboard.writeText(selector.textContent);
 }
