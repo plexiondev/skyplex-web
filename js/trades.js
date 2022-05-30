@@ -47,7 +47,7 @@ function generate() {
     document.getElementById('attr.name').textContent = `${name}`;
     document.getElementById('attr.profession').textContent = `${profession}`;
 
-    let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${name} Villager Spawn Egg","italic":false}'},EntityTag:{ActiveEffects:[{Id:10b,Amplifier:255b,Duration:9999},{Id:11b,Amplifier:2555b,Duration:9999},{Id:12b,Amplifier:2555b,Duration:9999}],CustomName:'{"text":"${name}","italic":false}',VillagerData:{profession:"minecraft:${profession}"},NoAI:1b,Offers:{Recipes:[`;
+    let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${name} Villager Spawn Egg","italic":false}'},EntityTag:{ActiveEffects:[{Id:10b,Amplifier:255b,Duration:9999,ShowParticles:0b},{Id:11b,Amplifier:2555b,Duration:9999,ShowParticles:0b},{Id:12b,Amplifier:2555b,Duration:9999,ShowParticles:0b}],CustomName:'{"text":"${name}","italic":false}',VillagerData:{profession:"minecraft:${profession}"},NoAI:1b,Offers:{Recipes:[`;
 
     let count = 0;
     for (let n in data) {
