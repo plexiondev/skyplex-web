@@ -43,6 +43,9 @@ function generate() {
         }
     }
 
+    document.getElementById('attr.name').textContent = `${name}`;
+    document.getElementById('attr.profession').textContent = `${profession}`;
+
     let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${name} Villager Spawn Egg","italic":false}'},EntityTag:{VillagerData:{profession:"minecraft:${profession}"},NoAI:1b,Offers:{Recipes:[`;
 
     let count = 0;
