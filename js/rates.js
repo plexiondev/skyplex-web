@@ -12,18 +12,20 @@ const types = {
 function get_rates() {
     $.get('/generate/rates.json',function(data) {
         for (let type in data) {
-            create_type_category(type);
-            for (let i in data[`${type}`]) {
-                let em_record = document.createElement('tr');
-                em_record.innerHTML = (`
-                <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[`${type}`][i].name}.png"</div></th>
-                <th class="name">${data[`${type}`][i].name}</th>
-                <th class="values"><code class="on no-icon">+${data[`${type}`][i].level}</code></th>
-                <th class="values"><code class="no-icon">$${data[`${type}`][i].sell}</code> <code>x${data[`${type}`][i].quantity}</code></th>
-                `);
+            if (type != 'trades') {
+                create_type_category(type);
+                for (let i in data[`${type}`]) {
+                    let em_record = document.createElement('tr');
+                    em_record.innerHTML = (`
+                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[`${type}`][i].name}.png"</div></th>
+                    <th class="name">${data[`${type}`][i].name}</th>
+                    <th class="values"><code class="on no-icon">+${data[`${type}`][i].level}</code></th>
+                    <th class="values"><code class="no-icon">$${data[`${type}`][i].sell}</code> <code>x${data[`${type}`][i].quantity}</code></th>
+                    `);
 
-                // append
-                document.getElementById(`category.${type}.table`).appendChild(em_record);
+                    // append
+                    document.getElementById(`category.${type}.table`).appendChild(em_record);
+                }
             }
         }
     });
