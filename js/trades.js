@@ -100,7 +100,7 @@ function generate() {
                     } else {
                         // buy
                         output = `${output}${comma}{buy:{id:"minecraft:gold_nugget",Count:${data[n][i].cost}b},sell:{id:"minecraft:${data[n][i].name}",Count:1b${nbt},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}}`;
-                        values = `<th class="values"><code class="no-icon">$${data[n][i].cost}</code>`;
+                        values = `<th class="values"><code class="no-icon">$${data[n][i].cost}</code></th>`;
                     }
 
                     // record
