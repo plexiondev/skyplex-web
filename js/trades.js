@@ -57,11 +57,6 @@ function generate() {
                 for (let t in data[n][i].trades) {
                     if (data[n][i].trades[t] == trade) { match = true }
                 }
-                if (match == true) {
-                    let comma0 = '';
-                    if (count != 0) { comma0 = ',' }
-                    output = `${output}${comma0}`;
-                }
             }
 
             for (let i in data[n]) {
@@ -71,8 +66,34 @@ function generate() {
                 }
                 if (match == true) {
                     let comma = '';
-                    if (i != 0) { comma = ',' }
-                    output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}`;
+                    console.log(i)
+                    if (i >= 1) { comma = ',' }
+
+                    // advanced nbt
+                    let nbt = '';
+                    let nbt_count = 0;
+                    let nbt_tag = ',tag:{';
+                    for (let x in data[n][i].item) {
+                        if (x == 'custom_name') {
+                            // custom name
+                            nbt_tag = `${nbt_tag}display:{Name:'{"text":"${data[n][i].item.custom_name}","italic":false}'}`
+                        } else if (x == 'skyplex_id') {
+                            // skyplex id
+                            nbt_tag = `${nbt_tag},CustomModelData:${data[n][i].item.skyplex_id}`;
+                        }
+
+                        nbt_count += 1;
+                    }
+                    nbt_tag = `${nbt_tag}}`;
+                    nbt = `${nbt_tag}`;
+
+                    if (data[n][i].type == 'sell') {
+                        // sell
+                        output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b${nbt}},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}`;
+                    } else {
+                        // buy
+                        output = `${output}${comma}{buy:{id:"minecraft:gold_nugget",Count:${data[n][i].cost}b},sell:{id:"minecraft:${data[n][i].name}",Count:1b${nbt},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}}`;
+                    }
 
                     // record
                     let em_record = document.createElement('tr');

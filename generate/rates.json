@@ -14,7 +14,7 @@
         { "name": "redstone", "level": 0, "type": "sell", "sell": 0, "quantity": 0, "trades": ["deep_miner"] }
     ],
     "miner_tools": [
-        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001, "skyplex_name": "placeholder_pickaxe"}, "required_level": 1, "type": "buy", "cost": "3", "trades": ["miner_tools"] }
+        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": "3", "trades": ["miner_tools"] }
     ],
     "fish": [
         { "name": "catch", "level": 1, "sell": 0, "quantity": 0 }
