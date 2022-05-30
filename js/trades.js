@@ -24,6 +24,13 @@ function select() {
 // generate
 function generate() {
     document.getElementById('cont').innerHTML = '';
+    document.getElementById('table-body').innerHTML = (`
+    <tr>
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Sell</th>
+    </tr>
+    `);
 
     let trade = document.getElementById('trade').value;
     let profession;
