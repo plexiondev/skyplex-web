@@ -72,7 +72,7 @@ function generate() {
                 if (match == true) {
                     let comma = '';
                     if (i != 0) { comma = ',' }
-                    output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b}}`;
+                    output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}`;
 
                     // record
                     let em_record = document.createElement('tr');
