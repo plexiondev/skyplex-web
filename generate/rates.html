@@ -23,12 +23,12 @@
         // mining
         text = `${text}<br><br># mining`
         for (let i in data.mine) {
-            text = (`${text}<br>execute if score @s spmine.${data.mine[i].name} matches 1.. if score @s lvl.mine matches ${parseInt(i)+1} run scoreboard players operation @s lvl.mine.progress += mine.${data.mine[i].name} lvl.rates`);
+            text = (`${text}<br>execute if score @s spmine.${data.mine[i].name} matches 1.. run scoreboard players operation @s lvl.mine.progress += mine.${data.mine[i].name} lvl.rates`);
         }
         // fishing
         text = `${text}<br><br># fishing`
         for (let i in data.fish) {
-            text = (`${text}<br>execute if score @s spfish.${data.fish[i].name} matches 1.. if score @s lvl.fish matches ${parseInt(i)+1} run scoreboard players operation @s lvl.fish.progress += fish.${data.fish[i].name} lvl.rates`);
+            text = (`${text}<br>execute if score @s spfish.${data.fish[i].name} matches 1.. run scoreboard players operation @s lvl.fish.progress += fish.${data.fish[i].name} lvl.rates`);
         }
 
         document.getElementById('sp:level/main').innerHTML = (`${text}`);
