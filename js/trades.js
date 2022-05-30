@@ -23,7 +23,7 @@ function select() {
 
 // generate
 function generate() {
-    document.getElementById('cont').innerHTML = '';
+    document.getElementById('output').innerHTML = '';
     document.getElementById('table-body').innerHTML = (`
     <tr>
         <th>Icon</th>
@@ -131,12 +131,12 @@ function generate() {
 
     // end
     output = `${output}]}}}`;
-    document.getElementById('cont').innerHTML = `${output}`;
+    document.getElementById('output').innerHTML = `${output}`;
 }
 
 // copy
 function copy() {
-    var selector = document.getElementById('cont');
+    var selector = document.getElementById('output');
 
     navigator.clipboard.writeText(selector.textContent);
 }
