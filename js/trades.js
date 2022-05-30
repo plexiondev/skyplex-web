@@ -63,6 +63,17 @@ function generate() {
                     let comma = '';
                     if (i != 0) { comma = ',' }
                     output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b}}`;
+
+                    // record
+                    let em_record = document.createElement('tr');
+                    em_record.innerHTML = (`
+                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[n][i].name}.png"</div></th>
+                    <th class="name">${data[n][i].name}</th>
+                    <th class="values"><code class="no-icon">$${data[n][i].sell}</code> <code>x${data[n][i].quantity}</code></th>
+                    `);
+
+                    // append
+                    document.getElementById(`table-body`).appendChild(em_record);
                 }
             }
 
@@ -73,4 +84,11 @@ function generate() {
     // end
     output = `${output}]}}}`;
     document.getElementById('cont').innerHTML = `${output}`;
+}
+
+// copy
+function copy() {
+    var selector = document.getElementById('cont');
+
+    navigator.clipboard.writeText(selector.textContent);
 }

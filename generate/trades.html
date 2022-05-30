@@ -16,11 +16,35 @@
         <span class="logo"></span>
         <span class="right">
             <select style="height: 46px; --top: 10px; margin: 10px;" id="trade"></select>
+            <a role="button" class="button sheared small" onclick="copy()">
+                <span class="content">Copy</span>
+            </a>
             <a role="button" class="button focus sheared small" onclick="generate()">
                 <span class="content">Generate</span>
             </a>
         </span>
     </section>
-    <textbox id="cont"></textbox>
+    <section style="padding: 15px var(--small-padding);">
+        <label class="overl">Raw code</label>
+        <br>
+        <textbox id="cont"></textbox>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <label class="overl">Preview</label>
+        <div class="customising-cont" style="text-align: left;">
+            <table class="customising">
+                <tbody id="table-body">
+                    <tr>
+                        <th>Icon</th>
+                        <th>Name</th>
+                        <th>Sell</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </body>
 <script src="/js/trades.js"></script>
