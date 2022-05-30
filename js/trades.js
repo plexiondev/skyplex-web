@@ -82,7 +82,7 @@ function generate() {
                             nbt_comma = ',';
                         }
 
-                        if (x == 'custom_name'){
+                        if (x == 'custom_name') {
                             // custom name
                             nbt_tag = `${nbt_tag}display:{Name:'{"text":"${data[n][i].item.custom_name}","italic":false}'}`;
                         } else if (x == 'skyplex_id') {
