@@ -26,21 +26,44 @@ function generate() {
     document.getElementById('cont').innerHTML = '';
 
     let trade = document.getElementById('trade').value;
+    let profession;
+    let name;
 
-    let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${trade} Villager Spawn Egg","italic":false}'},EntityTag:{Offers:{Recipes:[`;
+    for (let i in data.trades) {
+        if (data.trades[i].namespace == trade) {
+            profession = data.trades[i].profession;
+            name = data.trades[i].name;
+        }
+    }
+
+    let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${name} Villager Spawn Egg","italic":false}'},EntityTag:{VillagerData:{profession:"minecraft:${profession}"},NoAI:1b,Offers:{Recipes:[`;
 
     let count = 0;
     for (let n in data) {
         if (n != 'trades') {
             // not trades
-            let comma0 = '';
-            if (count != 0) { comma0 = ',' }
-            output = `${output}${comma0}`;
+            for (let i in data[n]) {
+                let match = false;
+                for (let t in data[n][i].trades) {
+                    if (data[n][i].trades[t] == trade) { match = true }
+                }
+                if (match == true) {
+                    let comma0 = '';
+                    if (count != 0) { comma0 = ',' }
+                    output = `${output}${comma0}`;
+                }
+            }
 
             for (let i in data[n]) {
-                let comma = '';
-                if (i != 0) { comma = ',' }
-                output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b}}`
+                let match = false;
+                for (let t in data[n][i].trades) {
+                    if (data[n][i].trades[t] == trade) { match = true }
+                }
+                if (match == true) {
+                    let comma = '';
+                    if (i != 0) { comma = ',' }
+                    output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b}}`;
+                }
             }
 
             count += 1;

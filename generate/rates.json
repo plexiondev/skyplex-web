@@ -1,6 +1,6 @@
 {
     "trades": [
-        { "namespace": "mine_0", "name": "Miner" }
+        { "namespace": "mine_0", "name": "Miner", "profession": "toolsmith" }
     ],
     "mine": [
         { "name": "cobblestone", "level": 1, "sell": 1, "quantity": 5, "trades": ["mine_0"] },
