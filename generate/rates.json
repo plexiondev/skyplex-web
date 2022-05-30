@@ -2,7 +2,8 @@
     "trades": [
         { "namespace": "miner", "name": "Miner", "profession": "blacksmith" },
         { "namespace": "miner_tools", "name": "Tools", "profession": "toolsmith" },
-        { "namespace": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" }
+        { "namespace": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
+        { "namespace": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" }
     ],
     "mine": [
         { "name": "cobblestone", "level": 1, "type": "sell", "sell": 1, "quantity": 5, "trades": ["miner","deep_miner"] },
@@ -15,6 +16,9 @@
     ],
     "miner_tools": [
         { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": "3", "trades": ["miner_tools"] }
+    ],
+    "deep_mines_unlock": [
+        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002}, "type": "buy", "cost": "32", "trades": ["deep_mines_unlock"] }
     ],
     "fish": [
         { "name": "catch", "level": 1, "sell": 0, "quantity": 0 }
