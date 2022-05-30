@@ -1,13 +1,16 @@
 {
     "trades": [
-        { "namespace": "mine_0", "name": "Miner", "profession": "toolsmith" }
+        { "namespace": "mine_0", "name": "Miner", "profession": "toolsmith" },
+        { "namespace": "mine_1", "name": "Deep Miner", "profession": "toolsmith" }
     ],
     "mine": [
-        { "name": "cobblestone", "level": 1, "sell": 1, "quantity": 5, "trades": ["mine_0"] },
-        { "name": "coal", "level": 2, "sell": 1, "quantity": 2, "trades": ["mine_0"] },
-        { "name": "raw_iron", "level": 3, "sell": 2, "quantity": 1, "trades": ["mine_0"] },
-        { "name": "raw_gold", "level": 3, "sell": 2, "quantity": 1, "trades": ["mine_0"] },
-        { "name": "diamond", "level": 4, "sell": 10, "quantity": 1 }
+        { "name": "cobblestone", "level": 1, "sell": 1, "quantity": 5, "trades": ["mine_0","mine_1"] },
+        { "name": "coal", "level": 2, "sell": 1, "quantity": 2, "trades": ["mine_0","mine_1"] },
+        { "name": "raw_iron", "level": 3, "sell": 2, "quantity": 1, "trades": ["mine_0","mine_1"] },
+        { "name": "raw_gold", "level": 3, "sell": 2, "quantity": 1, "trades": ["mine_0","mine_1"] },
+        { "name": "diamond", "level": 4, "sell": 10, "quantity": 1, "trades": ["mine_1"] },
+        { "name": "lapis_lazuli", "level": 0, "sell": 0, "quantity": 0, "trades": ["mine_1"] },
+        { "name": "redstone", "level": 0, "sell": 0, "quantity": 0, "trades": ["mine_1"] }
     ],
     "fish": [
         { "name": "catch", "level": 1, "sell": 0, "quantity": 0 }
