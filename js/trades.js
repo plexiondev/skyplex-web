@@ -66,20 +66,28 @@ function generate() {
                     if (data[n][i].trades[t] == trade) { match = true }
                 }
                 if (match == true) {
+                    // add comma if in list
                     let comma = '';
-                    if (i >= 1) { comma = ',' }
+                    if (i >= 1) { comma = ',' } // not first item
 
                     // advanced nbt
                     let nbt = '';
-                    let nbt_count = 0;
                     let nbt_tag = ',tag:{';
+                    // nbt comma
+                    let nbt_count = 0; // count to add commas
+                    let nbt_comma = '';
                     for (let x in data[n][i].item) {
+                        // comma
+                        if (nbt_count >= 1) {
+                            nbt_comma = ',';
+                        }
+
                         if (x == 'custom_name') {
                             // custom name
                             nbt_tag = `${nbt_tag}display:{Name:'{"text":"${data[n][i].item.custom_name}","italic":false}'}`
                         } else if (x == 'skyplex_id') {
                             // skyplex id
-                            nbt_tag = `${nbt_tag},CustomModelData:${data[n][i].item.skyplex_id}`;
+                            nbt_tag = `${nbt_tag}${nbt_comma}CustomModelData:${data[n][i].item.skyplex_id}`;
                         }
 
                         nbt_count += 1;
