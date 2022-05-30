@@ -28,7 +28,8 @@ function generate() {
     <tr>
         <th>Icon</th>
         <th>Name</th>
-        <th>Sell</th>
+        <th>Cost</th>
+        <th>ID</th>
     </tr>
     `);
 
@@ -66,7 +67,6 @@ function generate() {
                 }
                 if (match == true) {
                     let comma = '';
-                    console.log(i)
                     if (i >= 1) { comma = ',' }
 
                     // advanced nbt
@@ -87,12 +87,20 @@ function generate() {
                     nbt_tag = `${nbt_tag}}`;
                     nbt = `${nbt_tag}`;
 
+                    let skyplex_id = '';
+                    try {
+                        skyplex_id = data[n][i].item.skyplex_id;
+                    } catch(error) {}
+
+                    let values = '';
                     if (data[n][i].type == 'sell') {
                         // sell
                         output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b${nbt}},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}`;
+                        values = `<th class="values"><code class="no-icon">$${data[n][i].sell}</code> <code>x${data[n][i].quantity}</code></th>`;
                     } else {
                         // buy
                         output = `${output}${comma}{buy:{id:"minecraft:gold_nugget",Count:${data[n][i].cost}b},sell:{id:"minecraft:${data[n][i].name}",Count:1b${nbt},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}}`;
+                        values = `<th class="values"><code class="no-icon">$${data[n][i].cost}</code>`;
                     }
 
                     // record
@@ -100,7 +108,8 @@ function generate() {
                     em_record.innerHTML = (`
                     <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[n][i].name}.png"</div></th>
                     <th class="name">${data[n][i].name}</th>
-                    <th class="values"><code class="no-icon">$${data[n][i].sell}</code> <code>x${data[n][i].quantity}</code></th>
+                    ${values}
+                    <th>${skyplex_id}</th>
                     `);
 
                     // append
