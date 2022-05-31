@@ -18,7 +18,7 @@
         { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": "3", "trades": ["miner_tools"] }
     ],
     "deep_mines_unlock": [
-        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002}, "type": "buy", "cost": "32", "trades": ["deep_mines_unlock"] }
+        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": "32", "trades": ["deep_mines_unlock"] }
     ],
     "fish": [
         { "name": "catch", "level": 1, "sell": 0, "quantity": 0 }
