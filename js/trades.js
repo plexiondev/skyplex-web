@@ -26,9 +26,13 @@ function select() {
     });
 }
 
+function call_gen() {
+    generate(document.getElementById('trade').value);
+}
+
 
 // generate
-function generate() {
+function generate(trade) {
     document.getElementById('output').innerHTML = '';
     document.getElementById('table-body').innerHTML = (`
     <tr>
@@ -41,7 +45,6 @@ function generate() {
     </tr>
     `);
 
-    let trade = document.getElementById('trade').value;
     let profession;
     let name;
 
