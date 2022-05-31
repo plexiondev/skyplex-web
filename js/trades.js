@@ -66,7 +66,7 @@ function generate() {
     //}
 
     // entity data
-    object.EntityTag.CustomName = {"text":`${name}`};
+    object.EntityTag.CustomName = {"text":`${name}`,"italic":false};
     object.EntityTag.VillagerData = {profession:`minecraft:${profession}`};
     object.EntityTag.NoAI = 1;
     object.EntityTag.Offers = {Recipes:[]};
