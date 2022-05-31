@@ -60,21 +60,15 @@ function generate() {
     object.display = {Name:`{"text":"${name} Villager Spawn Egg","italic":false}`,Lore:[`{"text":"Profession: ${profession}","color":"gray","italic":false}`]};
     
     // active effects
-    object.EntityTag = {ActiveEffects:[]}
-    for (let i in active_effects) {
-        object.EntityTag.ActiveEffects.push({Id:active_effects[i],Amplifier:255,Duration:99999,ShowParticles:0});
-    }
+    //object.EntityTag = {ActiveEffects:[]}
+    //for (let i in active_effects) {
+    //    object.EntityTag.ActiveEffects.push({Id:active_effects[i],Amplifier:255,Duration:99999,ShowParticles:0});
+    //}
 
-    // entity name
+    // entity data
     object.EntityTag.CustomName = {"text":`${name}`};
-    
-    // villager data
     object.EntityTag.VillagerData = {profession:`minecraft:${profession}`};
-
-    // remove ai
     object.EntityTag.NoAI = 1;
-
-    // offers
     object.EntityTag.Offers = {Recipes:[]};
 
 
