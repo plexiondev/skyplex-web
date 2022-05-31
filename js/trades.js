@@ -50,19 +50,17 @@ function generate(trade) {
 
     for (let i in data.trades) {
         if (data.trades[i].namespace == trade) {
-            profession = data.trades[i].profession;
             name = data.trades[i].name;
         }
     }
 
     document.getElementById('attr.name').textContent = `${name}`;
-    document.getElementById('attr.profession').textContent = `${profession}`;
 
     // assemble json
     var object = {display:{},EntityTag:{}};
 
     // spawn egg display (name)
-    object.display = {Name:`{"text":"${name} Villager Spawn Egg","italic":false}`,Lore:[`{"text":"Profession: ${profession}","color":"gray","italic":false}`]};
+    object.display = {Name:`{"text":"${name} Villager Spawn Egg","italic":false}`,Lore:[`{"text":"Name: ${name}","color":"gray","italic":false}`]};
     
     // active effects
     //object.EntityTag = {ActiveEffects:[]}
