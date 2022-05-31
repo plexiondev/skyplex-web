@@ -32,10 +32,12 @@ function generate() {
     document.getElementById('output').innerHTML = '';
     document.getElementById('table-body').innerHTML = (`
     <tr>
-        <th>Icon</th>
+        <th></th>
         <th>Name</th>
-        <th>Cost</th>
-        <th>ID</th>
+        <th class="arrow-get"></th>
+        <th></th>
+        <th>Name</th>
+        <th></th>
     </tr>
     `);
 
@@ -86,14 +88,19 @@ function generate() {
                 if (match == true) {
                     // if valid
 
+                    let custom_name = data[n][i].name;
+                    let custom_description = '';
+
                     // advanced nbt
                     var nbt = {};
                     for (let x in data[n][i].item) {
                         if (x == 'custom_name') {
                             if (typeof nbt.display == 'undefined') { nbt.display = {} }
+                            custom_name = data[n][i].item.custom_name;
                             nbt.display.Name = `{"text":"${data[n][i].item.custom_name}","italic":false}`;
                         } else if (x == 'description') {
                             if (typeof nbt.display == 'undefined') { nbt.display = {} }
+                            custom_description = data[n][i].item.description;
                             nbt.display.Lore = [`{"text":"${data[n][i].item.description}","italic":false,"color":"gray"}`];
                         } else if (x == 'skyplex_id') {
                             nbt.CustomModelData = data[n][i].item.skyplex_id;
@@ -103,7 +110,7 @@ function generate() {
                     // check for skyplex id
                     let skyplex_id = '';
                     try {
-                        skyplex_id = data[n][i].item.skyplex_id;
+                        skyplex_id = `#${data[n][i].item.skyplex_id}`;
                     } catch(error) {}
 
                     // check for cost item
@@ -112,9 +119,18 @@ function generate() {
                         cost_item = data[n][i].cost_item;
                     }
 
+                    // check for quantity
+                    let quantity = 1;
+                    if (data[n][i].quantity != undefined) {
+                        quantity = data[n][i].quantity;
+                    }
+
+
+                    // record
+                    let em_record = document.createElement('tr');
+
 
                     // buy & sell data
-                    let values = '';
                     var items = {};
                     if (data[n][i].type == 'sell') {
                         // sell
@@ -122,7 +138,7 @@ function generate() {
                         items.buy = {id:`minecraft:${data[n][i].name}`,Count:data[n][i].quantity};
                         if (Object.keys(nbt).length > 0) { items.buy.tag = nbt; }
 
-                        items.sell = {id:`minecraft:${cost_item}`,Count:data[n][i].sell}
+                        items.sell = {id:`minecraft:${cost_item}`,Count:data[n][i].cost}
 
                         // disable locking trades
                         items.priceMultipler = 0.0;
@@ -130,7 +146,14 @@ function generate() {
                         items.demand = 0;
                         items.specialPrice = 0;
 
-                        values = `<th class="values"><code class="no-icon">$${data[n][i].sell}</code> <code>x${data[n][i].quantity}</code></th>`;
+                        em_record.innerHTML = (`
+                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].name}.png"</div></th>
+                        <th class="name" title="${custom_description}">${custom_name}<label class="count">${quantity}</label></th>
+                        <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
+                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${cost_item}.png"</div></th>
+                        <th class="name">${cost_item}<label class="count">${data[n][i].cost}</label></th>
+                        <th><label class="over">${skyplex_id}</label></th>
+                        `);
                     } else {
                         // buy
 
@@ -145,25 +168,24 @@ function generate() {
                         items.demand = 0;
                         items.specialPrice = 0;
 
-                        values = `<th class="values"><code class="no-icon">$${data[n][i].cost}</code></th>`;
+                        em_record.innerHTML = (`
+                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${cost_item}.png"</div></th>
+                        <th class="name">${cost_item}<label class="count">${data[n][i].cost}</label></th>
+                        <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
+                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].name}.png"</div></th>
+                        <th class="name" title="${custom_description}">${custom_name}<label class="count">${quantity}</label></th>
+                        <th><label class="over">${skyplex_id}</label></th>
+                        `);
                     }
 
                     // append to offers
                     object.EntityTag.Offers.Recipes.push(items);
 
 
-                    // record
-                    let em_record = document.createElement('tr');
-                    em_record.innerHTML = (`
-                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[n][i].name}.png"</div></th>
-                    <th class="name">${data[n][i].name}</th>
-                    ${values}
-                    <th>${skyplex_id}</th>
-                    `);
-
                     // append
                     document.getElementById(`table-body`).appendChild(em_record);
                 }
+                feather.replace();
             }
         }
     }
