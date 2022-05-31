@@ -60,7 +60,7 @@ function generate(trade) {
     var object = {display:{},EntityTag:{}};
 
     // spawn egg display (name)
-    object.display = {Name:`{"text":"${name} Villager Spawn Egg","italic":false}`,Lore:[`{"text":"Name: ${name}","color":"gray","italic":false}`]};
+    object.display = {Lore:[`{"text":"Name: ${name}","color":"gray","italic":false}`]};
     
     // active effects
     //object.EntityTag = {ActiveEffects:[]}
@@ -69,7 +69,7 @@ function generate(trade) {
     //}
 
     // entity data
-    object.EntityTag.CustomName = {"text":`${name}`,"italic":false};
+    object.EntityTag.CustomName = `{"text":"${name}"}`;
     object.EntityTag.NoAI = 1;
     object.EntityTag.Offers = {Recipes:[]};
 
