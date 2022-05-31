@@ -1,38 +1,17 @@
 {
-    "trades": [
-        { "namespace": "miner", "name": "Miner", "profession": "blacksmith" },
-        { "namespace": "miner_tools", "name": "Tools", "profession": "toolsmith" },
-        { "namespace": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
-        { "namespace": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" },
-        { "namespace": "test", "name": "Tester", "profession": "blacksmith" }
-    ],
     "mine": [
-        { "name": "cobblestone", "level": 1, "type": "sell", "sell": 1, "quantity": 5, "trades": ["miner","deep_miner"] },
-        { "name": "coal", "level": 2, "type": "sell", "sell": 1, "quantity": 2, "trades": ["miner","deep_miner"] },
-        { "name": "raw_iron", "level": 3, "type": "sell", "sell": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
-        { "name": "raw_gold", "level": 3, "type": "sell", "sell": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
-        { "name": "diamond", "level": 4, "type": "sell", "sell": 10, "quantity": 1, "trades": ["deep_miner"] },
-        { "name": "lapis_lazuli", "level": 0, "type": "sell", "sell": 0, "quantity": 0, "trades": ["deep_miner"] },
-        { "name": "redstone", "level": 0, "type": "sell", "sell": 0, "quantity": 0, "trades": ["deep_miner"] }
-    ],
-    "miner_tools": [
-        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": 3, "trades": ["miner_tools"] }
-    ],
-    "deep_mines_unlock": [
-        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": 32, "trades": ["deep_mines_unlock"] }
+        { "name": "cobblestone", "level": 1 },
+        { "name": "coal", "level": 2 },
+        { "name": "raw_iron", "level": 3 },
+        { "name": "raw_gold", "level": 3 },
+        { "name": "diamond", "level": 4 },
+        { "name": "lapis_lazuli", "level": 0 },
+        { "name": "redstone", "level": 0 }
     ],
     "fish": [
-        { "name": "catch", "level": 1, "sell": 0, "quantity": 0 }
+        { "name": "catch", "level": 1 }
     ],
     "farm": [
-        { "name": "wheat", "level": 1, "sell": 0, "quantity": 0 }
-    ],
-    "test": [
-        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"custom_name": "Testing item (no desc)", "skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"skyplex_id": 19160000, "description": "No name"}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "cost_item": "barrier", "trades": ["test"] }
+        { "name": "wheat", "level": 1 }
     ]
 }

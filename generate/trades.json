@@ -1,0 +1,32 @@
+{
+    "trades": [
+        { "namespace": "miner", "name": "Miner", "profession": "blacksmith" },
+        { "namespace": "miner_tools", "name": "Tools", "profession": "toolsmith" },
+        { "namespace": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
+        { "namespace": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" },
+        { "namespace": "test", "name": "Tester", "profession": "blacksmith" }
+    ],
+    "mine": [
+        { "name": "cobblestone", "type": "sell", "sell": 1, "quantity": 5, "trades": ["miner","deep_miner"] },
+        { "name": "coal", "type": "sell", "sell": 1, "quantity": 2, "trades": ["miner","deep_miner"] },
+        { "name": "raw_iron", "type": "sell", "sell": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
+        { "name": "raw_gold", "type": "sell", "sell": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
+        { "name": "diamond", "type": "sell", "sell": 10, "quantity": 1, "trades": ["deep_miner"] },
+        { "name": "lapis_lazuli", "type": "sell", "sell": 0, "quantity": 0, "trades": ["deep_miner"] },
+        { "name": "redstone", "type": "sell", "sell": 0, "quantity": 0, "trades": ["deep_miner"] }
+    ],
+    "miner_tools": [
+        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": 3, "trades": ["miner_tools"] }
+    ],
+    "deep_mines_unlock": [
+        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": 32, "trades": ["deep_mines_unlock"] }
+    ],
+    "test": [
+        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"custom_name": "Testing item (no desc)", "skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"skyplex_id": 19160000, "description": "No name"}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "cost_item": "barrier", "trades": ["test"] }
+    ]
+}
