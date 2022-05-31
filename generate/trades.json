@@ -4,6 +4,7 @@
         { "namespace": "miner_tools", "name": "Tools", "profession": "toolsmith" },
         { "namespace": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
         { "namespace": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" },
+        { "namespace": "fisherman", "name": "Fisherman", "profession": "fisherman" },
         { "namespace": "test", "name": "Tester", "profession": "blacksmith" }
     ],
     "mine": [
@@ -20,6 +21,12 @@
     ],
     "deep_mines_unlock": [
         { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": 32, "trades": ["deep_mines_unlock"] }
+    ],
+    "fisherman": [
+        { "name": "cod", "type": "sell", "sell": 2, "quantity": 1, "trades": ["fisherman"] },
+        { "name": "salmon", "type": "sell", "sell": 2, "quantity": 1, "trades": ["fisherman"] },
+        { "name": "pufferfish", "type": "sell", "sell": 1, "quantity": 1, "trades": ["fisherman"] },
+        { "name": "tropical_fish", "type": "sell", "sell": 12, "quantity": 1, "trades": ["fisherman"] }
     ],
     "test": [
         { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "trades": ["test"] },
