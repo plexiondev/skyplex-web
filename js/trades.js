@@ -127,7 +127,6 @@ function generate() {
                         // disable locking trades
                         items.priceMultipler = 0.0;
                         items.maxUses = 2147483647;
-                        items.rewardExp = 0;
                         items.demand = 0;
                         items.specialPrice = 0;
 
@@ -143,7 +142,6 @@ function generate() {
                         // disable locking trades
                         items.priceMultipler = 0.0;
                         items.maxUses = 2147483647;
-                        items.rewardExp = 0;
                         items.demand = 0;
                         items.specialPrice = 0;
 
