@@ -102,9 +102,10 @@ function generate() {
 
                     // check for cost item
                     let cost_item = 'gold_nugget';
-                    try {
+                    if (data[n][i].cost_item != undefined) {
                         cost_item = data[n][i].cost_item;
-                    } catch(error) {}
+                    }
+                    console.log(cost_item);
 
                     let values = '';
                     if (data[n][i].type == 'sell') {
