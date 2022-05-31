@@ -138,7 +138,7 @@ function generate() {
                         items.sell = {id:`minecraft:${data[n][i].name}`,Count:1};
                         if (Object.keys(nbt).length > 0) { items.sell.tag = nbt; }
 
-                        items.buy = {id:`minecraft:gold_nugget`,Count:data[n][i].cost}
+                        items.buy = {id:`minecraft:${cost_item}`,Count:data[n][i].cost}
 
                         // disable locking trades
                         items.priceMultipler = 0.0;
