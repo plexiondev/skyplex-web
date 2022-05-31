@@ -169,7 +169,7 @@ function generate() {
     }
 
     // display output
-    let output = `give @p villager_spawn_egg${JSON.stringify(object)}`;
+    let output = `give @p villager_spawn_egg${JSON.stringify(object).replaceAll('\\','')}`;
     document.getElementById('output').innerHTML = `${output}`;
 }
 
