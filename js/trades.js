@@ -100,14 +100,20 @@ function generate() {
                         skyplex_id = data[n][i].item.skyplex_id;
                     } catch(error) {}
 
+                    // check for cost item
+                    let cost_item = 'gold_nugget';
+                    try {
+                        cost_item = data[n][i].cost_item;
+                    } catch(error) {}
+
                     let values = '';
                     if (data[n][i].type == 'sell') {
                         // sell
-                        output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b${nbt}},sell:{id:"minecraft:gold_nugget",Count:${data[n][i].sell}b},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}`;
+                        output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b${nbt}},sell:{id:"minecraft:${cost_item}",Count:${data[n][i].sell}b},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}`;
                         values = `<th class="values"><code class="no-icon">$${data[n][i].sell}</code> <code>x${data[n][i].quantity}</code></th>`;
                     } else {
                         // buy
-                        output = `${output}${comma}{buy:{id:"minecraft:gold_nugget",Count:${data[n][i].cost}b},sell:{id:"minecraft:${data[n][i].name}",Count:1b${nbt},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}}`;
+                        output = `${output}${comma}{buy:{id:"minecraft:${cost_item}",Count:${data[n][i].cost}b},sell:{id:"minecraft:${data[n][i].name}",Count:1b${nbt},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}}`;
                         values = `<th class="values"><code class="no-icon">$${data[n][i].cost}</code></th>`;
                     }
 
