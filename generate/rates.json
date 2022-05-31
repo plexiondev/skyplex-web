@@ -16,10 +16,10 @@
         { "name": "redstone", "level": 0, "type": "sell", "sell": 0, "quantity": 0, "trades": ["deep_miner"] }
     ],
     "miner_tools": [
-        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": "3", "trades": ["miner_tools"] }
+        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": 3, "trades": ["miner_tools"] }
     ],
     "deep_mines_unlock": [
-        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": "32", "trades": ["deep_mines_unlock"] }
+        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": 32, "trades": ["deep_mines_unlock"] }
     ],
     "fish": [
         { "name": "catch", "level": 1, "sell": 0, "quantity": 0 }
@@ -28,11 +28,11 @@
         { "name": "wheat", "level": 1, "sell": 0, "quantity": 0 }
     ],
     "test": [
-        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": "32", "trades": ["test"] },
-        { "name": "stick", "type": "buy", "cost": "32", "trades": ["test"] },
-        { "name": "stick", "item": {"custom_name": "Testing item (no desc)", "skyplex_id": 19160000}, "type": "buy", "cost": "32", "trades": ["test"] },
-        { "name": "stick", "item": {"skyplex_id": 19160000, "description": "No name"}, "type": "buy", "cost": "32", "trades": ["test"] },
-        { "name": "stick", "item": {"skyplex_id": 19160000}, "type": "buy", "cost": "32", "trades": ["test"] },
-        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": "32", "cost_item": "barrier", "trades": ["test"] }
+        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"custom_name": "Testing item (no desc)", "skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"skyplex_id": 19160000, "description": "No name"}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
+        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "cost_item": "barrier", "trades": ["test"] }
     ]
 }

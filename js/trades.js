@@ -1,6 +1,12 @@
 // trades generate
 
 
+const active_effects = {
+    0: 10,
+    1: 11,
+    2: 12
+}
+
 let data;
 select();
 
@@ -47,52 +53,58 @@ function generate() {
     document.getElementById('attr.name').textContent = `${name}`;
     document.getElementById('attr.profession').textContent = `${profession}`;
 
-    let output = `give @p villager_spawn_egg{display:{Name:'{"text":"${name} Villager Spawn Egg","italic":false}'},EntityTag:{ActiveEffects:[{Id:10b,Amplifier:255b,Duration:99999,ShowParticles:0b},{Id:11b,Amplifier:2555b,Duration:99999,ShowParticles:0b},{Id:12b,Amplifier:2555b,Duration:99999,ShowParticles:0b}],CustomName:'{"text":"${name}","italic":false}',VillagerData:{profession:"minecraft:${profession}"},NoAI:1b,Offers:{Recipes:[`;
+    // assemble json
+    var object = {display:{},EntityTag:{}};
 
-    let count = 0;
+    // spawn egg display (name)
+    object.display = {Name:`{"text":"${name} Villager Spawn Egg","italic":false}`,Lore:[`{"text":"Profession: ${profession}","color":"gray","italic":false}`]};
+    
+    // active effects
+    object.EntityTag = {ActiveEffects:[]}
+    for (let i in active_effects) {
+        object.EntityTag.ActiveEffects.push({Id:active_effects[i],Amplifier:255,Duration:99999,ShowParticles:0});
+    }
+
+    // entity name
+    object.EntityTag.CustomName = {"text":`${name}`};
+    
+    // villager data
+    object.EntityTag.VillagerData = {profession:`minecraft:${profession}`};
+
+    // remove ai
+    object.EntityTag.NoAI = 1;
+
+    // offers
+    object.EntityTag.Offers = {Recipes:[]};
+
+
+    // loop through rates
     for (let n in data) {
         if (n != 'trades') {
-            // not trades
-            for (let i in data[n]) {
-                let match = false;
-                for (let t in data[n][i].trades) {
-                    if (data[n][i].trades[t] == trade) { match = true }
-                }
-            }
+            // not trades array
 
             for (let i in data[n]) {
+                // valid trade?
                 let match = false;
                 for (let t in data[n][i].trades) {
                     if (data[n][i].trades[t] == trade) { match = true }
                 }
                 if (match == true) {
-                    // add comma if in list
-                    let comma = '';
-                    if (i >= 1) { comma = ',' } // not first item
+                    // if valid
 
                     // advanced nbt
-                    let nbt = '';
-                    let nbt_tag = ',tag:{';
-                    // nbt comma
-                    let nbt_count = 0; // count to add commas
-                    let nbt_comma = '';
+                    var nbt = {};
                     for (let x in data[n][i].item) {
-                        // comma
-                        if (nbt_count >= 1) { nbt_comma = ','; } // not first item
-
                         if (x == 'custom_name') {
-                            // custom name
-                            nbt_tag = `${nbt_tag}display:{Name:'{"text":"${data[n][i].item.custom_name}","italic":false}'}`;
+                            if (typeof nbt.display == 'undefined') { nbt.display = {} }
+                            nbt.display.Name = `{"text":"${data[n][i].item.custom_name}","italic":false}`;
+                        } else if (x == 'description') {
+                            if (typeof nbt.display == 'undefined') { nbt.display = {} }
+                            nbt.display.Lore = [`{"text":"${data[n][i].item.description}","italic":false,"color":"gray"}`];
                         } else if (x == 'skyplex_id') {
-                            // skyplex id
-                            nbt_tag = `${nbt_tag}${nbt_comma}CustomModelData:${data[n][i].item.skyplex_id}`;
+                            nbt.CustomModelData = data[n][i].item.skyplex_id;
                         }
-
-                        nbt_count += 1;
                     }
-                    // write to nbt var
-                    nbt_tag = `${nbt_tag}}`;
-                    nbt = `${nbt_tag}`;
 
                     // check for skyplex id
                     let skyplex_id = '';
@@ -105,18 +117,48 @@ function generate() {
                     if (data[n][i].cost_item != undefined) {
                         cost_item = data[n][i].cost_item;
                     }
-                    console.log(cost_item);
 
+
+                    // buy & sell data
                     let values = '';
+                    var items = {};
                     if (data[n][i].type == 'sell') {
                         // sell
-                        output = `${output}${comma}{buy:{id:"minecraft:${data[n][i].name}",Count:${data[n][i].quantity}b${nbt}},sell:{id:"minecraft:${cost_item}",Count:${data[n][i].sell}b},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}`;
+
+                        items.buy = {id:`minecraft:${data[n][i].name}`,Count:data[n][i].quantity};
+                        if (Object.keys(nbt).length > 0) { items.buy.tag = nbt; }
+
+                        items.sell = {id:`minecraft:${cost_item}`,Count:data[n][i].sell}
+
+                        // disable locking trades
+                        items.priceMultipler = 0.0;
+                        items.maxUses = 2147483647;
+                        items.rewardExp = 0;
+                        items.demand = 0;
+                        items.specialPrice = 0;
+
                         values = `<th class="values"><code class="no-icon">$${data[n][i].sell}</code> <code>x${data[n][i].quantity}</code></th>`;
                     } else {
                         // buy
-                        output = `${output}${comma}{buy:{id:"minecraft:${cost_item}",Count:${data[n][i].cost}b},sell:{id:"minecraft:${data[n][i].name}",Count:1b${nbt},priceMultiplier:0.0f,maxUses:2147483647,rewardExp:0b,demand:0,specialPrice:0}}`;
+
+                        items.sell = {id:`minecraft:${data[n][i].name}`,Count:1};
+                        if (Object.keys(nbt).length > 0) { items.sell.tag = nbt; }
+
+                        items.buy = {id:`minecraft:gold_nugget`,Count:data[n][i].cost}
+
+                        // disable locking trades
+                        items.priceMultipler = 0.0;
+                        items.maxUses = 2147483647;
+                        items.rewardExp = 0;
+                        items.demand = 0;
+                        items.specialPrice = 0;
+
                         values = `<th class="values"><code class="no-icon">$${data[n][i].cost}</code></th>`;
                     }
+
+                    // append to offers
+                    object.EntityTag.Offers.Recipes.push(items);
+
 
                     // record
                     let em_record = document.createElement('tr');
@@ -131,13 +173,11 @@ function generate() {
                     document.getElementById(`table-body`).appendChild(em_record);
                 }
             }
-
-            count += 1;
         }
     }
 
     // display output
-    output = `${output}]}}}`;
+    let output = `give @p villager_spawn_egg${JSON.stringify(object)}`;
     document.getElementById('output').innerHTML = `${output}`;
 }
 
