@@ -88,42 +88,31 @@ function generate() {
                 if (match == true) {
                     // if valid
 
-                    let custom_name = data[n][i].name;
-                    let custom_description = '';
+                    // buy
+                    var buy_name = data[n][i].buy.id;
+                    var buy_description = '';
+                    var buy_model = '';
+                    // sell
+                    var sell_name = data[n][i].sell.id;
+                    var sell_description = '';
+                    var sell_model = '';
 
                     // advanced nbt
-                    var nbt = {};
-                    for (let x in data[n][i].item) {
-                        if (x == 'custom_name') {
-                            if (typeof nbt.display == 'undefined') { nbt.display = {} }
-                            custom_name = data[n][i].item.custom_name;
-                            nbt.display.Name = `{"text":"${data[n][i].item.custom_name}","italic":false}`;
-                        } else if (x == 'description') {
-                            if (typeof nbt.display == 'undefined') { nbt.display = {} }
-                            custom_description = data[n][i].item.description;
-                            nbt.display.Lore = [`{"text":"${data[n][i].item.description}","italic":false,"color":"gray"}`];
-                        } else if (x == 'skyplex_id') {
-                            nbt.CustomModelData = data[n][i].item.skyplex_id;
-                        }
-                    }
-
-                    // check for skyplex id
-                    let skyplex_id = '';
                     try {
-                        skyplex_id = `#${data[n][i].item.skyplex_id}`;
-                    } catch(error) {}
+                        var buy_data = nbt('buy',{},n,i);
+                        var sell_data = nbt('sell',{},n,i);
 
-                    // check for cost item
-                    let cost_item = 'gold_nugget';
-                    if (data[n][i].cost_item != undefined) {
-                        cost_item = data[n][i].cost_item;
-                    }
+                        buy_nbt = buy_data[0]
+                        sell_nbt = sell_data[0]
 
-                    // check for quantity
-                    let quantity = 1;
-                    if (data[n][i].quantity != undefined) {
-                        quantity = data[n][i].quantity;
-                    }
+                        if (buy_data[1] != '') { buy_name = buy_data[1] }
+                        if (buy_data[2] != '') { buy_description = buy_data[2] }
+                        if (buy_data[3] != '') { buy_model = buy_data[3] }
+
+                        if (sell_data[1] != '') { sell_name = sell_data[1] }
+                        if (sell_data[2] != '') { sell_description = sell_data[2] }
+                        if (sell_data[3] != '') { sell_model = sell_data[3] }
+                    } catch(error) { }
 
 
                     // record
@@ -132,51 +121,28 @@ function generate() {
 
                     // buy & sell data
                     var items = {};
-                    if (data[n][i].type == 'sell') {
-                        // sell
 
-                        items.buy = {id:`minecraft:${data[n][i].name}`,Count:data[n][i].quantity};
-                        if (Object.keys(nbt).length > 0) { items.buy.tag = nbt; }
+                    // buy item
+                    items.buy = {id:`${data[n][i].buy.id}`,Count:data[n][i].buy.count};
+                    if (typeof buy_nbt === 'undefined') { items.buy.tag = buy_nbt; }
 
-                        items.sell = {id:`minecraft:${cost_item}`,Count:data[n][i].cost}
+                    // sell item
+                    items.sell = {id:`${data[n][i].sell.id}`,Count:data[n][i].sell.count};
+                    if (typeof sell_nbt === 'undefined') { items.sell.tag = sell_nbt; }
 
-                        // disable locking trades
-                        items.priceMultipler = 0.0;
-                        items.maxUses = 2147483647;
-                        items.demand = 0;
-                        items.specialPrice = 0;
+                    // disable locking trades
+                    items.priceMultipler = 0.0;
+                    items.maxUses = 2147483647;
+                    items.demand = 0;
+                    items.specialPrice = 0;
 
-                        em_record.innerHTML = (`
-                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].name}.png"</div></th>
-                        <th class="name" title="${custom_description}">${custom_name}<label class="count">${quantity}</label></th>
-                        <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
-                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${cost_item}.png"</div></th>
-                        <th class="name">${cost_item}<label class="count">${data[n][i].cost}</label></th>
-                        <th><label class="over">${skyplex_id}</label></th>
-                        `);
-                    } else {
-                        // buy
-
-                        items.sell = {id:`minecraft:${data[n][i].name}`,Count:1};
-                        if (Object.keys(nbt).length > 0) { items.sell.tag = nbt; }
-
-                        items.buy = {id:`minecraft:${cost_item}`,Count:data[n][i].cost}
-
-                        // disable locking trades
-                        items.priceMultipler = 0.0;
-                        items.maxUses = 2147483647;
-                        items.demand = 0;
-                        items.specialPrice = 0;
-
-                        em_record.innerHTML = (`
-                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${cost_item}.png"</div></th>
-                        <th class="name">${cost_item}<label class="count">${data[n][i].cost}</label></th>
-                        <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
-                        <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].name}.png"</div></th>
-                        <th class="name" title="${custom_description}">${custom_name}<label class="count">${quantity}</label></th>
-                        <th><label class="over">${skyplex_id}</label></th>
-                        `);
-                    }
+                    em_record.innerHTML = (`
+                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
+                    <th class="name" title="${sell_description}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
+                    <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
+                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
+                    <th class="name" title="${buy_description}">${buy_name}<label class="count">${data[n][i].buy.count}</label></th>
+                    `);
 
                     // append to offers
                     object.EntityTag.Offers.Recipes.push(items);
@@ -193,6 +159,30 @@ function generate() {
     // display output
     let output = `give @p villager_spawn_egg${JSON.stringify(object).replaceAll('\\','')}`;
     document.getElementById('output').innerHTML = `${output}`;
+}
+
+// parse nbt
+function nbt(type,nbt,n,i) {
+    let custom_name = '';
+    let custom_description = '';
+    let custom_model = '';
+
+    for (let x in data[n][i][`${type}`].nbt) {
+        if (x == 'name') {
+            if (typeof nbt.display == 'undefined') { nbt.display = {} }
+            custom_name = data[n][i][`${type}`].nbt.name;
+            nbt.display.Name = `{"text":"${data[n][i][`${type}`].nbt.name}","italic":false}`;
+        } else if (x == 'description') {
+            if (typeof nbt.display == 'undefined') { nbt.display = {} }
+            custom_description = data[n][i][`${type}`].nbt.description;
+            nbt.display.Lore = [`{"text":"${data[n][i][`${type}`].nbt.description}","italic":false,"color":"gray"}`];
+        } else if (x == 'skyplex_id') {
+            custom_model = data[n][i][`${type}`].nbt.model;
+            nbt.CustomModelData = data[n][i][`${type}`].nbt.model;
+        }
+    }
+
+    return [nbt,custom_name,custom_description,custom_model];
 }
 
 // copy

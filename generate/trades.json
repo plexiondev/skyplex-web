@@ -8,19 +8,19 @@
         { "namespace": "test", "name": "Tester", "profession": "blacksmith" }
     ],
     "mine": [
-        { "name": "cobblestone", "type": "sell", "cost": 1, "quantity": 5, "trades": ["miner","deep_miner"] },
-        { "name": "coal", "type": "sell", "cost": 1, "quantity": 2, "trades": ["miner","deep_miner"] },
-        { "name": "raw_iron", "type": "sell", "cost": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
-        { "name": "raw_gold", "type": "sell", "cost": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
-        { "name": "diamond", "type": "sell", "cost": 10, "quantity": 1, "trades": ["deep_miner"] },
-        { "name": "lapis_lazuli", "type": "sell", "cost": 0, "quantity": 0, "trades": ["deep_miner"] },
-        { "name": "redstone", "type": "sell", "cost": 0, "quantity": 0, "trades": ["deep_miner"] }
+        { "id": "cobblestone", "type": "sell", "cost": 1, "quantity": 5, "trades": ["miner","deep_miner"] },
+        { "id": "coal", "type": "sell", "cost": 1, "quantity": 2, "trades": ["miner","deep_miner"] },
+        { "id": "raw_iron", "type": "sell", "cost": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
+        { "id": "raw_gold", "type": "sell", "cost": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
+        { "id": "diamond", "type": "sell", "cost": 10, "quantity": 1, "trades": ["deep_miner"] },
+        { "id": "lapis_lazuli", "type": "sell", "cost": 0, "quantity": 0, "trades": ["deep_miner"] },
+        { "id": "redstone", "type": "sell", "cost": 0, "quantity": 0, "trades": ["deep_miner"] }
     ],
     "miner_tools": [
-        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "skyplex_id": 19160001}, "required_level": 1, "type": "buy", "cost": 3, "quantity": 1, "trades": ["miner_tools"] }
+        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "model": 19160001}, "required_level": 1, "type": "buy", "cost": 3, "quantity": 1, "trades": ["miner_tools"] }
     ],
     "deep_mines_unlock": [
-        { "name": "paper", "item": {"custom_name": "Deep Mines", "skyplex_id": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": 32, "quantity": 1, "cost_item": "raw_gold", "trades": ["deep_mines_unlock"] }
+        { "name": "paper", "item": {"custom_name": "Deep Mines", "model": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": 32, "quantity": 1, "cost_item": "raw_gold", "trades": ["deep_mines_unlock"] }
     ],
     "fisherman": [
         { "name": "cod", "type": "sell", "cost": 2, "quantity": 1, "trades": ["fisherman"] },
@@ -29,12 +29,7 @@
         { "name": "tropical_fish", "type": "sell", "cost": 12, "quantity": 1, "trades": ["fisherman"] }
     ],
     "test": [
-        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"custom_name": "Testing item (no desc)", "skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"skyplex_id": 19160000, "description": "No name"}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"skyplex_id": 19160000}, "type": "buy", "cost": 32, "trades": ["test"] },
-        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "buy", "cost": 32, "cost_item": "barrier", "trades": ["test"] },
-        { "name": "stick", "item": {"custom_name": "Testing item", "skyplex_id": 19160000, "description": "YEP"}, "type": "sell", "cost": 32, "quantity": 1, "cost_item": "barrier", "trades": ["test"] }
+        { "sell": { "id": "stick", "count": 1 }, "buy": { "id": "gold_nugget", "count": 5 }, "trades": ["test"] },
+        { "sell": { "id": "apple", "nbt": { "name": "Custom NBT Name" }, "count": 3 }, "buy": { "id": "golden_apple", "nbt": { "name": "Blue Apple" }, "count": 5 }, "trades": ["test"] }
     ]
 }
