@@ -8,28 +8,30 @@
         { "namespace": "test", "name": "Tester", "profession": "blacksmith" }
     ],
     "mine": [
-        { "id": "cobblestone", "type": "sell", "cost": 1, "quantity": 5, "trades": ["miner","deep_miner"] },
-        { "id": "coal", "type": "sell", "cost": 1, "quantity": 2, "trades": ["miner","deep_miner"] },
-        { "id": "raw_iron", "type": "sell", "cost": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
-        { "id": "raw_gold", "type": "sell", "cost": 2, "quantity": 1, "trades": ["miner","deep_miner"] },
-        { "id": "diamond", "type": "sell", "cost": 10, "quantity": 1, "trades": ["deep_miner"] },
-        { "id": "lapis_lazuli", "type": "sell", "cost": 0, "quantity": 0, "trades": ["deep_miner"] },
-        { "id": "redstone", "type": "sell", "cost": 0, "quantity": 0, "trades": ["deep_miner"] }
+        { "sell": { "id": "gold_nugget", "count": 1 }, "buy": { "id": "cobblestone", "count": 5 }, "trades": ["miner","deep_miner"] },
+        { "sell": { "id": "gold_nugget", "count": 1 }, "buy": { "id": "coal", "count": 2 }, "trades": ["miner","deep_miner"] },
+        { "sell": { "id": "gold_nugget", "count": 2 }, "buy": { "id": "raw_iron", "count": 1 }, "trades": ["miner","deep_miner"] },
+        { "sell": { "id": "gold_nugget", "count": 2 }, "buy": { "id": "raw_gold", "count": 1 }, "trades": ["miner","deep_miner"] },
+        { "sell": { "id": "gold_nugget", "count": 10 }, "buy": { "id": "diamond", "count": 1 }, "trades": ["deep_miner"] },
+        { "sell": { "id": "gold_nugget", "count": 1 }, "buy": { "id": "lapis_lazuli", "count": 1 }, "trades": ["deep_miner"] },
+        { "sell": { "id": "gold_nugget", "count": 1 }, "buy": { "id": "redstone", "count": 1 }, "trades": ["deep_miner"] }
     ],
     "miner_tools": [
-        { "name": "wooden_pickaxe", "item": {"custom_name": "Placeholder Pickaxe", "model": 19160001}, "required_level": 1, "type": "buy", "cost": 3, "quantity": 1, "trades": ["miner_tools"] }
+        { "sell": { "id": "wooden_pickaxe", "count": 1, "nbt": { "name": "Placeholder Pickaxe", "model": 19160001 } }, "buy": { "id": "gold_nugget", "count": 3 }, "trades": ["miner_tools"] }
     ],
     "deep_mines_unlock": [
-        { "name": "paper", "item": {"custom_name": "Deep Mines", "model": 19160002, "description": "Unlocks the Deep Mines (permanent)"}, "type": "buy", "cost": 32, "quantity": 1, "cost_item": "raw_gold", "trades": ["deep_mines_unlock"] }
+        { "sell": { "id": "paper", "count": 1, "nbt": { "name": "Deep Mines", "description": "Unlocks the Deep Mines (permanent)", "model": 19160002 } }, "buy": { "id": "raw_gold", "count": 32 }, "trades": ["deep_mines_unlock"] }
     ],
     "fisherman": [
-        { "name": "cod", "type": "sell", "cost": 2, "quantity": 1, "trades": ["fisherman"] },
-        { "name": "salmon", "type": "sell", "cost": 2, "quantity": 1, "trades": ["fisherman"] },
-        { "name": "pufferfish", "type": "sell", "cost": 1, "quantity": 1, "trades": ["fisherman"] },
-        { "name": "tropical_fish", "type": "sell", "cost": 12, "quantity": 1, "trades": ["fisherman"] }
+        { "sell": { "id": "gold_nugget", "count": 2 }, "buy": { "id": "cod", "count": 1 }, "trades": ["fisherman"] },
+        { "sell": { "id": "gold_nugget", "count": 2 }, "buy": { "id": "salmon", "count": 1 }, "trades": ["fisherman"] },
+        { "sell": { "id": "gold_nugget", "count": 1 }, "buy": { "id": "pufferfish", "count": 1 }, "trades": ["fisherman"] },
+        { "sell": { "id": "gold_nugget", "count": 12 }, "buy": { "id": "tropical_fish", "count": 1 }, "trades": ["fisherman"] }
     ],
     "test": [
+        { "sell": { "id": "gold_nugget", "count": 5 }, "buy": { "id": "stick", "count": 1 }, "trades": ["test"] },
         { "sell": { "id": "stick", "count": 1 }, "buy": { "id": "gold_nugget", "count": 5 }, "trades": ["test"] },
-        { "sell": { "id": "apple", "nbt": { "name": "Custom NBT Name" }, "count": 3 }, "buy": { "id": "golden_apple", "nbt": { "name": "Blue Apple" }, "count": 5 }, "trades": ["test"] }
+        { "sell": { "id": "emerald", "nbt": { "name": "Diamond" }, "count": 2 }, "buy": { "id": "gold_nugget", "count": 1 }, "trades": ["test"] },
+        { "sell": { "id": "golden_apple", "nbt": { "name": "Blue Apple", "description": "real" }, "count": 5 }, "buy": { "id": "apple", "nbt": { "name": "Green Apple", "description": "real" }, "count": 3 }, "trades": ["test"] }
     ]
 }

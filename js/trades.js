@@ -124,11 +124,11 @@ function generate() {
 
                     // buy item
                     items.buy = {id:`${data[n][i].buy.id}`,Count:data[n][i].buy.count};
-                    if (typeof buy_nbt === 'undefined') { items.buy.tag = buy_nbt; }
+                    if (typeof buy_nbt != 'undefined') { items.buy.tag = buy_nbt; }
 
                     // sell item
                     items.sell = {id:`${data[n][i].sell.id}`,Count:data[n][i].sell.count};
-                    if (typeof sell_nbt === 'undefined') { items.sell.tag = sell_nbt; }
+                    if (typeof sell_nbt != 'undefined') { items.sell.tag = sell_nbt; }
 
                     // disable locking trades
                     items.priceMultipler = 0.0;
@@ -137,11 +137,11 @@ function generate() {
                     items.specialPrice = 0;
 
                     em_record.innerHTML = (`
-                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
-                    <th class="name" title="${sell_description}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
-                    <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
                     <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
                     <th class="name" title="${buy_description}">${buy_name}<label class="count">${data[n][i].buy.count}</label></th>
+                    <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
+                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
+                    <th class="name" title="${sell_description}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
                     `);
 
                     // append to offers
@@ -157,7 +157,7 @@ function generate() {
     }
 
     // display output
-    let output = `give @p villager_spawn_egg${JSON.stringify(object).replaceAll('\\','')}`;
+    let output = `give @p villager_spawn_egg${JSON.stringify(object)}`;
     document.getElementById('output').innerHTML = `${output}`;
 }
 
