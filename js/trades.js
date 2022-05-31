@@ -12,7 +12,7 @@ select();
 
 // fill up select
 function select() {
-    $.get('/generate/rates.json',function(response) {
+    $.get('/generate/trades.json',function(response) {
         data = response;
 
         for (let i in data.trades) {

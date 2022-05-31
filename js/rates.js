@@ -20,7 +20,6 @@ function get_rates() {
                     <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 5px;"><img src="https://plexion.dev/img/item/${data[`${type}`][i].name}.png"</div></th>
                     <th class="name">${data[`${type}`][i].name}</th>
                     <th class="values"><code class="on no-icon">+${data[`${type}`][i].level}</code></th>
-                    <th class="values"><code class="no-icon">$${data[`${type}`][i].sell}</code> <code>x${data[`${type}`][i].quantity}</code></th>
                     `);
 
                     // append
@@ -46,7 +45,6 @@ function create_type_category(type) {
                     <th class="icon">Icon</th>
                     <th class="name">Name</th>
                     <th class="values">Level</th>
-                    <th class="values">Sell</th>
                 </tr>
             </tbody>
         </table>
