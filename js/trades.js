@@ -195,7 +195,7 @@ function nbt(type,nbt,n,i) {
             if (typeof nbt.display == 'undefined') { nbt.display = {} }
             custom_description = data[n][i][`${type}`].nbt.description;
             nbt.display.Lore = [`{"text":"${data[n][i][`${type}`].nbt.description}","italic":false,"color":"gray"}`];
-        } else if (x == 'skyplex_id') {
+        } else if (x == 'model') {
             custom_model = data[n][i][`${type}`].nbt.model;
             nbt.CustomModelData = data[n][i][`${type}`].nbt.model;
         } else if (x == 'enchants') {
