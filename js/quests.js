@@ -224,7 +224,7 @@ function nbt(type,nbt,n,i) {
             quest = data[n][i][`${type}`].nbt.quest_id;
             nbt.QuestID = data[n][i][`${type}`].nbt.quest_id;
             // generic quest list
-            quest_generic = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>execute if score @s quest.holding >= 1 internal if score quest.holding_id internal matches ${data[n][i][`${type}`].nbt.quest_id} run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1<br>execute if score @s quest.holding >= 1 internal if score quest.holding_id internal matches ${data[n][i][`${type}`].nbt.quest_id} run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start`;
+            quest_generic = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>execute if score @s quest.holding matches 1.. if score quest.holding_id internal matches ${data[n][i][`${type}`].nbt.quest_id} run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1<br>execute if score @s quest.holding matches 1.. if score quest.holding_id internal matches ${data[n][i][`${type}`].nbt.quest_id} run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start`;
             quest_load = `scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy`;
         } else if (x == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
