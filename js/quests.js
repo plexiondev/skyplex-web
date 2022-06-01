@@ -47,6 +47,9 @@ function generate(quest) {
         }
     }
 
+    let quest_generic = '';
+    let quest_load = '';
+
     document.getElementById('attr.name').textContent = `${name}`;
 
     // assemble json
@@ -107,12 +110,16 @@ function generate(quest) {
                         if (buy_data[3] != '') { buy_model = buy_data[3] }
                         if (buy_data[4] != '') { buy_quest = buy_data[4] }
                         if (buy_data[5] != '') { buy_enchants = buy_data[5] }
+                        if (buy_data[6] != '') { quest_generic = `${quest_generic}<br>${buy_data[6]}` }
+                        if (buy_data[7] != '') { quest_load = `${quest_load}<br>${buy_data[7]}` }
 
                         if (sell_data[1] != '') { sell_name = sell_data[1] }
                         if (sell_data[2] != '') { sell_description = sell_data[2] }
                         if (sell_data[3] != '') { sell_model = sell_data[3] }
                         if (sell_data[4] != '') { sell_quest = sell_data[4] }
                         if (sell_data[5] != '') { sell_enchants = sell_data[5] }
+                        if (sell_data[6] != '') { quest_generic = `${quest_generic}<br>${sell_data[6]}` }
+                        if (sell_data[7] != '') { quest_load = `${quest_load}<br>${sell_data[7]}` }
                     } catch(error) { }
 
                     // buy & sell data
@@ -171,6 +178,8 @@ function generate(quest) {
     // display output
     let output = `give @p villager_spawn_egg${JSON.stringify(object)}`;
     document.getElementById('output').innerHTML = `${output}`;
+    document.getElementById('output_generic').innerHTML = `${quest_generic}`;
+    document.getElementById('output_load').innerHTML = `${quest_load}`;
 }
 
 // parse nbt
@@ -181,6 +190,8 @@ function nbt(type,nbt,n,i) {
     let quest = 0;
     let rewards;
     let custom_enchants = [];
+    let quest_generic = '';
+    let quest_load = '';
 
     for (let x in data[n][i][`${type}`].nbt) {
         if (x == 'name') {
@@ -212,6 +223,9 @@ function nbt(type,nbt,n,i) {
         } else if (x == 'quest_id') {
             quest = data[n][i][`${type}`].nbt.quest_id;
             nbt.QuestID = data[n][i][`${type}`].nbt.quest_id;
+            // generic quest list
+            quest_generic = `execute if score @s quest.holding >= 1 internal if score quest.holding_id internal matches ${data[n][i][`${type}`].nbt.quest_id} quest.list run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start`;
+            quest_load = `scoreboard players set ${data[n][i][`${type}`].nbt.quest_id} quest.list ${data[n][i][`${type}`].nbt.quest_id}`;
         } else if (x == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
             custom_enchants = data[n][i][`${type}`].nbt.enchants;
@@ -221,7 +235,7 @@ function nbt(type,nbt,n,i) {
         }
     }
 
-    return [nbt,custom_name,custom_description,custom_model,quest,custom_enchants];
+    return [nbt,custom_name,custom_description,custom_model,quest,custom_enchants,quest_generic,quest_load];
 }
 
 // copy
