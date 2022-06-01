@@ -155,8 +155,6 @@ function generate(trade) {
                     <th class="name has-tooltip${sell_enchant}" title="${sell_description} ${format_sell_enchants}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
                     `);
 
-                    
-
 
                     // append
                     document.getElementById(`table-body`).appendChild(em_record);
