@@ -11,8 +11,8 @@ function select() {
 
         for (let i in data.trades) {
             let em_option = document.createElement('option');
-            em_option.value = `${data.trades[i].namespace}`;
-            em_option.innerHTML = `${data.trades[i].name} (${data.trades[i].namespace})`;
+            em_option.value = `${data.trades[i].id}`;
+            em_option.innerHTML = `${data.trades[i].name} (${data.trades[i].id})`;
 
             // append
             document.getElementById('trade').appendChild(em_option);
@@ -42,7 +42,7 @@ function generate(trade) {
     let name;
 
     for (let i in data.trades) {
-        if (data.trades[i].namespace == trade) {
+        if (data.trades[i].id == trade) {
             name = data.trades[i].name;
         }
     }
