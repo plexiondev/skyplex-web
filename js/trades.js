@@ -175,6 +175,7 @@ function nbt(type,nbt,n,i) {
     let custom_description = '';
     let custom_model = '';
     let custom_enchants = [];
+    let damage = 0;
 
     for (let x in data[n][i][`${type}`].nbt) {
         if (x == 'name') {
@@ -194,6 +195,9 @@ function nbt(type,nbt,n,i) {
             for (let e in data[n][i][`${type}`].nbt.enchants) {
                 nbt.Enchantments.push({id:`minecraft:${data[n][i][`${type}`].nbt.enchants[e].id}`,lvl:data[n][i][`${type}`].nbt.enchants[e].lvl});
             }
+        } else if (x == 'damage') {
+            damage = data[n][i][`${type}`].nbt.damage;
+            nbt.Damage = data[n][i][`${type}`].nbt.damage;
         }
     }
 
