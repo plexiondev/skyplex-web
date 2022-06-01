@@ -1,12 +1,6 @@
 // trades generate
 
 
-const active_effects = {
-    0: 10,
-    1: 11,
-    2: 12
-}
-
 let data;
 select();
 
@@ -45,7 +39,6 @@ function generate(trade) {
     </tr>
     `);
 
-    let profession;
     let name;
 
     for (let i in data.trades) {
@@ -92,10 +85,12 @@ function generate(trade) {
                     var buy_name = data[n][i].buy.id;
                     var buy_description = '';
                     var buy_model = '';
+                    var buy_enchants= [];
                     // sell
                     var sell_name = data[n][i].sell.id;
                     var sell_description = '';
                     var sell_model = '';
+                    var sell_enchants = [];
 
                     // advanced nbt
                     try {
@@ -108,11 +103,20 @@ function generate(trade) {
                         if (buy_data[1] != '') { buy_name = buy_data[1] }
                         if (buy_data[2] != '') { buy_description = buy_data[2] }
                         if (buy_data[3] != '') { buy_model = buy_data[3] }
+                        if (buy_data[4] != '') { buy_enchants = buy_data[4] }
 
                         if (sell_data[1] != '') { sell_name = sell_data[1] }
                         if (sell_data[2] != '') { sell_description = sell_data[2] }
                         if (sell_data[3] != '') { sell_model = sell_data[3] }
+                        if (sell_data[4] != '') { sell_enchants = sell_data[4] }
                     } catch(error) { }
+
+                    // visually display enchant in preview
+                    let buy_enchant = '';
+                    let sell_enchant = '';
+                    // check for enchants
+                    if (buy_enchants.length > 0) { buy_enchant = ' enchant'; }
+                    if (sell_enchants.length > 0) { sell_enchant = ' enchant'; }
 
 
                     // record
@@ -137,11 +141,11 @@ function generate(trade) {
                     items.specialPrice = 0;
 
                     em_record.innerHTML = (`
-                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
-                    <th class="name" title="${buy_description}">${buy_name}<label class="count">${data[n][i].buy.count}</label></th>
+                    <th class="icon${buy_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
+                    <th class="name${buy_enchant}" title="${buy_description}">${buy_name}<label class="count">${data[n][i].buy.count}</label></th>
                     <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
-                    <th class="icon"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
-                    <th class="name" title="${sell_description}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
+                    <th class="icon${sell_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
+                    <th class="name${sell_enchant}" title="${sell_description}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
                     `);
 
                     // append to offers
@@ -166,6 +170,7 @@ function nbt(type,nbt,n,i) {
     let custom_name = '';
     let custom_description = '';
     let custom_model = '';
+    let custom_enchants = [];
 
     for (let x in data[n][i][`${type}`].nbt) {
         if (x == 'name') {
@@ -179,10 +184,16 @@ function nbt(type,nbt,n,i) {
         } else if (x == 'skyplex_id') {
             custom_model = data[n][i][`${type}`].nbt.model;
             nbt.CustomModelData = data[n][i][`${type}`].nbt.model;
+        } else if (x == 'enchants') {
+            if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
+            custom_enchants = data[n][i][`${type}`].nbt.enchants;
+            for (let e in data[n][i][`${type}`].nbt.enchants) {
+                nbt.Enchantments.push({id:`minecraft:${data[n][i][`${type}`].nbt.enchants[e].id}`,lvl:data[n][i][`${type}`].nbt.enchants[e].lvl});
+            }
         }
     }
 
-    return [nbt,custom_name,custom_description,custom_model];
+    return [nbt,custom_name,custom_description,custom_model,custom_enchants];
 }
 
 // copy

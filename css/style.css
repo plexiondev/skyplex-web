@@ -36,3 +36,7 @@ th {
     text-decoration: none !important;
     cursor: initial !important;
 }
+
+.enchant {
+    --text-head: #cd6de2;
+}
