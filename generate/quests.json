@@ -10,10 +10,12 @@
                 "count": 1,
                 "nbt": {
                     "name": "Cool quest",
-                    "description": "It is so awesome\ntry it now\n\nRewards: 5 Gold, 20 Bitches",
+                    "description": [{"text":"it is so awesome","color":"gray","italic":false},{"text":"try it now","color":"gray","italic":false}],
+                    "rewards": [{"id":"gold_nugget","count":64}],
                     "quest_id": 1
                 }
-            }
+            },
+            "quests": ["test"]
         }
     ]
 }

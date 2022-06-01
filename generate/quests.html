@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="https://plexion.dev/css/reset.css">
+    <link rel="stylesheet" href="https://plexion.dev/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>Skyplex quests generate</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body class="dark" style="--accent-page: var(--skyplex);">
+    <section class="download-steps header-bar" style="top: initial;">
+        <span class="logo"></span>
+        <span class="right">
+            <select style="height: 46px; --top: 10px; margin: 10px;" id="trade"></select>
+            <a role="button" class="button sheared small" onclick="copy()">
+                <span class="content">Copy</span>
+            </a>
+            <a role="button" class="button focus sheared small" onclick="call_gen()">
+                <span class="content">Generate</span>
+            </a>
+        </span>
+    </section>
+    <section style="padding: 15px var(--small-padding);">
+        <label class="overl">Raw code</label>
+        <br>
+        <textbox id="output"></textbox>
+        <br><br><br><br><br>
+        <label class="overl">Preview</label>
+        <div class="customising-cont" style="text-align: left;">
+            <table class="customising">
+                <tbody id="table-body">
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th class="arrow-get"></th>
+                        <th></th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="dl-wrap">
+            <dl>
+                <dt>Name</dt>
+                <dd id="attr.name"></dd>
+            </dl>
+        </div>
+    </section>
+</body>
+<script src="/js/quests.js"></script>
