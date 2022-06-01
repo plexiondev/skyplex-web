@@ -1,0 +1,19 @@
+{
+    "quests": [
+        { "id": "test", "name": "Test quest", "profession": "blacksmith" }
+    ],
+    "test": [
+        {
+            "buy": { "id": "gold_nugget", "count": 32 },
+            "sell": {
+                "id": "emerald",
+                "count": 1,
+                "nbt": {
+                    "name": "Cool quest",
+                    "description": "It is so awesome\ntry it now\n\nRewards: 5 Gold, 20 Bitches",
+                    "quest_id": 1
+                }
+            }
+        }
+    ]
+}
