@@ -111,18 +111,6 @@ function generate(trade) {
                         if (sell_data[4] != '') { sell_enchants = sell_data[4] }
                     } catch(error) { }
 
-                    // visually display enchant in preview
-                    let buy_enchant = '';
-                    let sell_enchant = '';
-                    // check for enchants
-                    if (buy_enchants.length > 0) { buy_enchant = ' enchant'; }
-                    if (sell_enchants.length > 0) { sell_enchant = ' enchant'; }
-
-
-                    // record
-                    let em_record = document.createElement('tr');
-
-
                     // buy & sell data
                     var items = {};
 
@@ -140,16 +128,34 @@ function generate(trade) {
                     items.demand = 0;
                     items.specialPrice = 0;
 
-                    em_record.innerHTML = (`
-                    <th class="icon${buy_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
-                    <th class="name${buy_enchant}" title="${buy_description}">${buy_name}<label class="count">${data[n][i].buy.count}</label></th>
-                    <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
-                    <th class="icon${sell_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
-                    <th class="name${sell_enchant}" title="${sell_description}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
-                    `);
-
                     // append to offers
                     object.EntityTag.Offers.Recipes.push(items);
+
+
+                    // visually display enchant in preview
+                    let buy_enchant = '';
+                    let sell_enchant = '';
+                    // check for enchants
+                    if (buy_enchants.length > 0) { buy_enchant = ' enchant'; }
+                    if (sell_enchants.length > 0) { sell_enchant = ' enchant'; }
+
+                    // format enchants
+                    let format_buy_enchants = '';
+                    let format_sell_enchants = '';
+                    for (let e in buy_enchants) { format_buy_enchants = `${format_buy_enchants}${buy_enchants[e].id} ${buy_enchants[e].lvl} `; }
+                    for (let e in sell_enchants) { format_sell_enchants = `${format_sell_enchants}${sell_enchants[e].id} ${sell_enchants[e].lvl} `; }
+
+                    // record
+                    let em_record = document.createElement('tr');
+                    em_record.innerHTML = (`
+                    <th class="icon${buy_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
+                    <th class="name has-tooltip${buy_enchant}" title="${buy_description} ${format_buy_enchants}">${buy_name}<label class="count">${data[n][i].buy.count}</label></th>
+                    <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
+                    <th class="icon${sell_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
+                    <th class="name has-tooltip${sell_enchant}" title="${sell_description} ${format_sell_enchants}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
+                    `);
+
+                    
 
 
                     // append
