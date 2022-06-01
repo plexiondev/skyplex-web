@@ -1,11 +1,11 @@
 {
     "trades": [
-        { "namespace": "miner", "name": "Miner", "profession": "blacksmith" },
-        { "namespace": "miner_tools", "name": "Tools", "profession": "toolsmith" },
-        { "namespace": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
-        { "namespace": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" },
-        { "namespace": "fisherman", "name": "Fisherman", "profession": "fisherman" },
-        { "namespace": "test", "name": "Tester", "profession": "blacksmith" }
+        { "id": "miner", "name": "Miner", "profession": "blacksmith" },
+        { "id": "miner_tools", "name": "Tools", "profession": "toolsmith" },
+        { "id": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
+        { "id": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" },
+        { "id": "fisherman", "name": "Fisherman", "profession": "fisherman" },
+        { "id": "test", "name": "Tester", "profession": "blacksmith" }
     ],
     "mine": [
         { "buy": { "id": "cobblestone", "count": 5 }, "sell": { "id": "gold_nugget", "count": 1 }, "trades": ["miner","deep_miner"] },
