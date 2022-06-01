@@ -86,11 +86,15 @@ function generate(trade) {
                     var buy_description = '';
                     var buy_model = '';
                     var buy_enchants= [];
+                    var buy_damage = 0;
+                    var buy_unbreakable = 0;
                     // sell
                     var sell_name = data[n][i].sell.id;
                     var sell_description = '';
                     var sell_model = '';
                     var sell_enchants = [];
+                    var sell_damage = 0;
+                    var sell_unbreakable = 0;
 
                     // advanced nbt
                     try {
@@ -104,11 +108,15 @@ function generate(trade) {
                         if (buy_data[2] != '') { buy_description = buy_data[2] }
                         if (buy_data[3] != '') { buy_model = buy_data[3] }
                         if (buy_data[4] != '') { buy_enchants = buy_data[4] }
+                        if (buy_data[5] != 0) { buy_damage = buy_data[5] }
+                        if (buy_data[6] != 0) { buy_unbreakable = buy_data[6] }
 
                         if (sell_data[1] != '') { sell_name = sell_data[1] }
                         if (sell_data[2] != '') { sell_description = sell_data[2] }
                         if (sell_data[3] != '') { sell_model = sell_data[3] }
                         if (sell_data[4] != '') { sell_enchants = sell_data[4] }
+                        if (sell_data[5] != 0) { sell_damage = sell_data[5] }
+                        if (sell_data[6] != 0) { sell_unbreakable = sell_data[6] }
                     } catch(error) { }
 
                     // buy & sell data
@@ -176,6 +184,7 @@ function nbt(type,nbt,n,i) {
     let custom_model = '';
     let custom_enchants = [];
     let damage = 0;
+    let unbreakable = 0;
 
     for (let x in data[n][i][`${type}`].nbt) {
         if (x == 'name') {
@@ -198,10 +207,13 @@ function nbt(type,nbt,n,i) {
         } else if (x == 'damage') {
             damage = data[n][i][`${type}`].nbt.damage;
             nbt.Damage = data[n][i][`${type}`].nbt.damage;
+        } else if (x == 'unbreakable') {
+            unbreakable = data[n][i][`${type}`].nbt.unbreakable;
+            nbt.Unbreakable = data[n][i][`${type}`].nbt.unbreakable;
         }
     }
 
-    return [nbt,custom_name,custom_description,custom_model,custom_enchants];
+    return [nbt,custom_name,custom_description,custom_model,custom_enchants,damage,unbreakable];
 }
 
 // copy
