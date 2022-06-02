@@ -12,7 +12,12 @@
                     "name": "Cool quest",
                     "description": [{"text":"it is so awesome","color":"gray","italic":false},{"text":"try it now","color":"gray","italic":false}],
                     "rewards": [{"id":"gold_nugget","count":64}],
-                    "quest_id": 1
+                    "quest_id": 1,
+                    "conditions": [
+                        {
+                            
+                        }
+                    ]
                 }
             },
             "quests": ["test"]
