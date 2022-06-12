@@ -14,15 +14,17 @@
                     "rewards": [{"id":"gold_nugget","count":64}],
                     "quest_id": 1,
                     "criteria": {
-                        "trigger": "minecraft:inventory_changed",
-                        "conditions": {
-                            "items": [
-                                {
-                                    "items": [
-                                        "minecraft:stone"
-                                    ]
-                                }
-                            ]
+                        "stone": {
+                            "trigger": "minecraft:inventory_changed",
+                            "conditions": {
+                                "items": [
+                                    {
+                                        "items": [
+                                            "minecraft:stone"
+                                        ]
+                                    }
+                                ]
+                            }
                         }
                     }
                 }
