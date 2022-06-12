@@ -13,11 +13,18 @@
                     "description": [{"text":"it is so awesome","color":"gray","italic":false},{"text":"try it now","color":"gray","italic":false}],
                     "rewards": [{"id":"gold_nugget","count":64}],
                     "quest_id": 1,
-                    "conditions": [
-                        {
-                            
+                    "criteria": {
+                        "trigger": "minecraft:inventory_changed",
+                        "conditions": {
+                            "items": [
+                                {
+                                    "items": [
+                                        "minecraft:stone"
+                                    ]
+                                }
+                            ]
                         }
-                    ]
+                    }
                 }
             },
             "quests": ["test"]
