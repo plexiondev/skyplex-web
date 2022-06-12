@@ -267,21 +267,25 @@ function copy() {
 }
 
 // generate advancement files
-function parse_advancement(data,quest_id,quest_advancement,quest_end_check,quest_end,rewards) {
+function parse_advancement(criteria,quest_id,quest_advancement,quest_end_check,quest_end,item) {
     let advancement = {display:{},criteria:{},rewards:{}};
+
+    advancement.display.title = {"text": `${item.nbt.name} (quest)`};
+    advancement.display.description = {"text": `Quest ${quest_id}`};
+    advancement.display.icon = {"item": `minecraft:${item.id}`};
 
     advancement.display.show_toast = false;
     advancement.display.announce_to_chat = false;
     advancement.display.hidden = true;
 
-    advancement.criteria = data;
+    advancement.criteria = criteria;
     advancement.rewards.function = `sp:system/quest/${quest_id}/end_check`;
 
     quest_advancement = `${quest_advancement}quest ${quest_id}<br>${JSON.stringify(advancement)}<br><br>`;
     quest_end_check = `${quest_end_check}## quest ${quest_id}<br>execute if score @s quest_${quest_id} matches 1.. run function sp:system/quest/${quest_id}/end<br>execute unless score @s quest_${quest_id} matches 1.. run advancement revoke @s only sp:quest_${quest_id}<br><br>`;
     
     for (let i in rewards) {
-        quest_end = `${quest_end}## quest ${quest_id}<br>give @s minecraft:${rewards[i].id} ${rewards[i].count}<br>tellraw @a ["",{"text":"quest ${quest_id} completed"}]<br><br>`;
+        quest_end = `${quest_end}## quest ${quest_id}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}<br>tellraw @a ["",{"text":"quest ${quest_id} completed"}]<br><br>`;
     }
 
     return [quest_advancement,quest_end_check,quest_end];
