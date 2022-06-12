@@ -51,6 +51,7 @@ function generate(quest) {
     let quest_load = '';
     let quest_advancement = '';
     let quest_end_check = '';
+    let quest_end = '';
 
     document.getElementById('attr.name').textContent = `${name}`;
 
@@ -112,10 +113,11 @@ function generate(quest) {
                         if (buy_data[3] != '') { buy_model = buy_data[3] }
                         if (buy_data[4] != '') {
                             buy_quest = buy_data[4];
-                            let buy_advancement_temp = parse_advancement(data[n][i].buy.nbt.criteria,buy_data[4],quest_advancement,quest_end_check);
+                            let buy_advancement_temp = parse_advancement(data[n][i].buy.nbt.criteria,buy_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].buy.nbt.rewards);
 
                             quest_advancement = buy_advancement_temp[0];
                             quest_end_check = buy_advancement_temp[1];
+                            quest_end = buy_advancement_temp[2];
                         }
                         if (buy_data[5] != '') { buy_enchants = buy_data[5] }
                         if (buy_data[6] != '') { quest_generic = `${quest_generic}<br>${buy_data[6]}` }
@@ -126,10 +128,11 @@ function generate(quest) {
                         if (sell_data[3] != '') { sell_model = sell_data[3] }
                         if (sell_data[4] != '') {
                             sell_quest = sell_data[4];
-                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,sell_data[4],quest_advancement,quest_end_check);
+                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,sell_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].sell.nbt.rewards);
 
                             quest_advancement = sell_advancement_temp[0];
                             quest_end_check = sell_advancement_temp[1];
+                            quest_end = sell_advancement_temp[2];
                         }
                         if (sell_data[5] != '') { sell_enchants = sell_data[5] }
                         if (sell_data[6] != '') { quest_generic = `${quest_generic}<br>${sell_data[6]}` }
@@ -196,6 +199,7 @@ function generate(quest) {
     document.getElementById('output_load').innerHTML = `${quest_load}`;
     document.getElementById('output_advancement').innerHTML = `${quest_advancement}`;
     document.getElementById('output_end_check').innerHTML = `${quest_end_check}`;
+    document.getElementById('output_end').innerHTML = `${quest_end}`;
 }
 
 // parse nbt
@@ -264,7 +268,7 @@ function copy() {
 }
 
 // generate advancement files
-function parse_advancement(data,quest_id,quest_advancement,quest_end_check) {
+function parse_advancement(data,quest_id,quest_advancement,quest_end_check,quest_end,rewards) {
     let advancement = {display:{},criteria:{},rewards:{}};
 
     advancement.display.show_toast = false;
@@ -276,6 +280,10 @@ function parse_advancement(data,quest_id,quest_advancement,quest_end_check) {
 
     quest_advancement = `${quest_advancement}quest ${quest_id}<br>${JSON.stringify(advancement)}<br><br>`;
     quest_end_check = `${quest_end_check}## quest ${quest_id}<br>execute if score @s quest_${quest_id} matches 1.. run function sp:system/quest/${quest_id}/end<br>execute unless score @s quest_${quest_id} matches 1.. run advancement revoke @s only sp:quest_${quest_id}<br><br>`;
+    
+    for (let i in rewards) {
+        quest_end = `${quest_end}## quest ${quest_id}<br>give @s minecraft:${rewards[i].id} ${rewards[i].count}<br><br>`;
+    }
 
-    return [quest_advancement,quest_end_check];
+    return [quest_advancement,quest_end_check,quest_end];
 }
