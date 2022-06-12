@@ -137,7 +137,7 @@ function generate(quest) {
                         if (sell_data[5] != '') { sell_enchants = sell_data[5] }
                         if (sell_data[6] != '') { quest_generic = `${quest_generic}<br>${sell_data[6]}` }
                         if (sell_data[7] != '') { quest_load = `${quest_load}<br>${sell_data[7]}` }
-                    } catch(error) { }
+                    } catch(error) {}
 
                     // buy & sell data
                     var items = {};
@@ -284,7 +284,7 @@ function parse_advancement(criteria,quest_id,quest_advancement,quest_end_check,q
     quest_advancement = `${quest_advancement}quest ${quest_id}<br>${JSON.stringify(advancement)}<br><br>`;
     quest_end_check = `${quest_end_check}## quest ${quest_id}<br>execute if score @s quest_${quest_id} matches 1.. run function sp:system/quest/${quest_id}/end<br>execute unless score @s quest_${quest_id} matches 1.. run advancement revoke @s only sp:quest_${quest_id}<br><br>`;
     
-    for (let i in rewards) {
+    for (let i in item.nbt.rewards) {
         quest_end = `${quest_end}## quest ${quest_id}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}<br>tellraw @a ["",{"text":"quest ${quest_id} completed"}]<br><br>`;
     }
 
