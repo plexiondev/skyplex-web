@@ -255,7 +255,7 @@ function parse_advancement(data,quest_id,quest_advancement) {
 
     advancement.display.show_toast = false;
     advancement.display.announce_to_chat = false;
-    advancement.display.hidden = false;
+    advancement.display.hidden = true;
 
     advancement.criteria = data;
     advancement.rewards.function = `sp:system/quest/${quest_id}/end_check`;
