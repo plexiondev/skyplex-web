@@ -50,6 +50,7 @@ function generate(quest) {
     let quest_generic = '';
     let quest_load = '';
     let quest_advancement = '';
+    let quest_end_check = '';
 
     document.getElementById('attr.name').textContent = `${name}`;
 
@@ -109,7 +110,13 @@ function generate(quest) {
                         if (buy_data[1] != '') { buy_name = buy_data[1] }
                         if (buy_data[2] != '') { buy_description = buy_data[2] }
                         if (buy_data[3] != '') { buy_model = buy_data[3] }
-                        if (buy_data[4] != '') { buy_quest = buy_data[4]; quest_advancement = parse_advancement(data[n][i].buy.nbt.criteria,buy_data[4],quest_advancement); }
+                        if (buy_data[4] != '') {
+                            buy_quest = buy_data[4];
+                            let buy_advancement_temp = parse_advancement(data[n][i].buy.nbt.criteria,buy_data[4],quest_advancement,quest_end_check);
+
+                            quest_advancement = buy_advancement_temp[0];
+                            quest_end_check = buy_advancement_temp[1];
+                        }
                         if (buy_data[5] != '') { buy_enchants = buy_data[5] }
                         if (buy_data[6] != '') { quest_generic = `${quest_generic}<br>${buy_data[6]}` }
                         if (buy_data[7] != '') { quest_load = `${quest_load}<br>${buy_data[7]}` }
@@ -117,7 +124,13 @@ function generate(quest) {
                         if (sell_data[1] != '') { sell_name = sell_data[1] }
                         if (sell_data[2] != '') { sell_description = sell_data[2] }
                         if (sell_data[3] != '') { sell_model = sell_data[3] }
-                        if (sell_data[4] != '') { sell_quest = sell_data[4]; quest_advancement = parse_advancement(data[n][i].sell.nbt.criteria,sell_data[4],quest_advancement); }
+                        if (sell_data[4] != '') {
+                            sell_quest = sell_data[4];
+                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,buy_data[4],quest_advancement,quest_end_check);
+
+                            quest_advancement = sell_advancement_temp[0];
+                            quest_end_check = sell_advancement_temp[1];
+                        }
                         if (sell_data[5] != '') { sell_enchants = sell_data[5] }
                         if (sell_data[6] != '') { quest_generic = `${quest_generic}<br>${sell_data[6]}` }
                         if (sell_data[7] != '') { quest_load = `${quest_load}<br>${sell_data[7]}` }
@@ -182,6 +195,7 @@ function generate(quest) {
     document.getElementById('output_generic').innerHTML = `${quest_generic}`;
     document.getElementById('output_load').innerHTML = `${quest_load}`;
     document.getElementById('output_advancement').innerHTML = `${quest_advancement}`;
+    document.getElementById('output_end_check').innerHTML = `${quest_end_check}`;
 }
 
 // parse nbt
@@ -250,7 +264,7 @@ function copy() {
 }
 
 // generate advancement files
-function parse_advancement(data,quest_id,quest_advancement) {
+function parse_advancement(data,quest_id,quest_advancement,quest_end_check) {
     let advancement = {display:{},criteria:{},rewards:{}};
 
     advancement.display.show_toast = false;
@@ -261,6 +275,7 @@ function parse_advancement(data,quest_id,quest_advancement) {
     advancement.rewards.function = `sp:system/quest/${quest_id}/end_check`;
 
     quest_advancement = `${quest_advancement}quest ${quest_id}<br>${JSON.stringify(advancement)}<br><br>`;
+    quest_end_check = `${quest_end_check}## quest ${quest_id}<br>execute if score @s quest_${quest_id} matches 1.. run function sp:system/quest/${quest_id}/end<br>execute unless score @s quest_${quest_id} matches 1.. run advancement revoke @s only sp:quest_${quest_id}<br><br>`;
 
-    return quest_advancement;
+    return [quest_advancement,quest_end_check];
 }
