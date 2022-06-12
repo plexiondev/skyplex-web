@@ -259,7 +259,7 @@ function nbt(type,nbt,n,i) {
 function copy() {
     var selector = document.getElementById('output');
 
-    // write to clipboardf
+    // write to clipboard
     navigator.clipboard.writeText(selector.textContent);
 }
 
