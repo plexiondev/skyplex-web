@@ -251,7 +251,11 @@ function copy() {
 
 // generate advancement files
 function parse_advancement(data,quest_id,quest_advancement) {
-    let advancement = {criteria:{},rewards:{}};
+    let advancement = {display:{},criteria:{},rewards:{}};
+
+    advancement.display.show_toast = false;
+    advancement.display.announce_to_chat = false;
+    advancement.display.hidden = false;
 
     advancement.criteria = data;
     advancement.rewards.function = `sp:system/quest/${quest_id}/end_check`;
