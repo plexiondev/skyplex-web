@@ -126,7 +126,7 @@ function generate(quest) {
                         if (sell_data[3] != '') { sell_model = sell_data[3] }
                         if (sell_data[4] != '') {
                             sell_quest = sell_data[4];
-                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,buy_data[4],quest_advancement,quest_end_check);
+                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,sell_data[4],quest_advancement,quest_end_check);
 
                             quest_advancement = sell_advancement_temp[0];
                             quest_end_check = sell_advancement_temp[1];
@@ -259,7 +259,7 @@ function nbt(type,nbt,n,i) {
 function copy() {
     var selector = document.getElementById('output');
 
-    // write to clipboard
+    // write to clipboardf
     navigator.clipboard.writeText(selector.textContent);
 }
 
