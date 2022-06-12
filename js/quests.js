@@ -282,7 +282,7 @@ function parse_advancement(data,quest_id,quest_advancement,quest_end_check,quest
     quest_end_check = `${quest_end_check}## quest ${quest_id}<br>execute if score @s quest_${quest_id} matches 1.. run function sp:system/quest/${quest_id}/end<br>execute unless score @s quest_${quest_id} matches 1.. run advancement revoke @s only sp:quest_${quest_id}<br><br>`;
     
     for (let i in rewards) {
-        quest_end = `${quest_end}## quest ${quest_id}<br>give @s minecraft:${rewards[i].id} ${rewards[i].count}<br><br>`;
+        quest_end = `${quest_end}## quest ${quest_id}<br>give @s minecraft:${rewards[i].id} ${rewards[i].count}<br>tellraw @a ["",{"text":"quest ${quest_id} completed"}]<br><br>`;
     }
 
     return [quest_advancement,quest_end_check,quest_end];
