@@ -113,7 +113,7 @@ function generate(quest) {
                         if (buy_data[3] != '') { buy_model = buy_data[3] }
                         if (buy_data[4] != '') {
                             buy_quest = buy_data[4];
-                            let buy_advancement_temp = parse_advancement(data[n][i].buy.nbt.criteria,buy_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].buy.nbt.rewards);
+                            let buy_advancement_temp = parse_advancement(data[n][i].buy.nbt.criteria,buy_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].buy);
 
                             quest_advancement = buy_advancement_temp[0];
                             quest_end_check = buy_advancement_temp[1];
@@ -128,7 +128,7 @@ function generate(quest) {
                         if (sell_data[3] != '') { sell_model = sell_data[3] }
                         if (sell_data[4] != '') {
                             sell_quest = sell_data[4];
-                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,sell_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].sell.nbt.rewards);
+                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,sell_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].sell);
 
                             quest_advancement = sell_advancement_temp[0];
                             quest_end_check = sell_advancement_temp[1];
