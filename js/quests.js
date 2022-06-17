@@ -50,6 +50,7 @@ function generate(quest) {
     let quest_generic = '';
     let quest_load = '';
     let quest_advancement = '';
+    let quest_start = '';
     let quest_end_check = '';
     let quest_end = '';
 
@@ -122,6 +123,7 @@ function generate(quest) {
                         if (buy_data[5] != '') { buy_enchants = buy_data[5] }
                         if (buy_data[6] != '') { quest_generic = `${quest_generic}<br>${buy_data[6]}` }
                         if (buy_data[7] != '') { quest_load = `${quest_load}<br>${buy_data[7]}` }
+                        if (buy_data[8] != '') { quest_start = `${quest_start}<br>${buy_data[8]}` }
 
                         if (sell_data[1] != '') { sell_name = sell_data[1] }
                         if (sell_data[2] != '') { sell_description = sell_data[2] }
@@ -137,6 +139,7 @@ function generate(quest) {
                         if (sell_data[5] != '') { sell_enchants = sell_data[5] }
                         if (sell_data[6] != '') { quest_generic = `${quest_generic}<br>${sell_data[6]}` }
                         if (sell_data[7] != '') { quest_load = `${quest_load}<br>${sell_data[7]}` }
+                        if (sell_data[8] != '') { quest_start = `${quest_start}<br>${sell_data[8]}` }
                     } catch(error) {}
 
                     // buy & sell data
@@ -198,6 +201,7 @@ function generate(quest) {
     document.getElementById('output_generic').innerHTML = `${quest_generic}`;
     document.getElementById('output_load').innerHTML = `${quest_load}`;
     document.getElementById('output_advancement').innerHTML = `${quest_advancement}`;
+    document.getElementById('output_start').innerHTML = `${quest_start}`;
     document.getElementById('output_end_check').innerHTML = `${quest_end_check}`;
     document.getElementById('output_end').innerHTML = `${quest_end}`;
 }
@@ -212,6 +216,7 @@ function nbt(type,nbt,n,i) {
     let custom_enchants = [];
     let quest_generic = '';
     let quest_load = '';
+    let quest_start = '';
 
     for (let x in data[n][i][`${type}`].nbt) {
         if (x == 'name') {
@@ -245,6 +250,7 @@ function nbt(type,nbt,n,i) {
             nbt.QuestID = data[n][i][`${type}`].nbt.quest_id;
             // generic quest list
             quest_generic = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} run clear @s ${data[n][i][`${type}`].id}{tag:{QuestID:${data[n][i][`${type}`].nbt.quest_id}}} 1`;
+            quest_start = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start<br>tellraw @s ["",{"text":"\n[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow"}]`;
             quest_load = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
         } else if (x == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
@@ -255,7 +261,7 @@ function nbt(type,nbt,n,i) {
         }
     }
 
-    return [nbt,custom_name,custom_description,custom_model,quest,custom_enchants,quest_generic,quest_load];
+    return [nbt,custom_name,custom_description,custom_model,quest,custom_enchants,quest_generic,quest_load,quest_start];
 }
 
 // copy
