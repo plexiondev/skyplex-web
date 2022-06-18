@@ -49,28 +49,23 @@ function generate(quest) {
     </tr>
     `);
 
-    let name;
+    let VillagerName;
+    for (let i in data.quests) if (data.quests[i].id == quest) VillagerName = data.quests[i].name;
 
-    for (let i in data.quests) {
-        if (data.quests[i].id == quest) {
-            name = data.quests[i].name;
-        }
-    }
+    let QuestGeneric = '';
+    let QuestLoad = '';
+    let QuestAdvancement = '';
+    let QuestStart = '';
+    let QuestEndCheck = '';
+    let QuestEnd = '';
 
-    let quest_generic = '';
-    let quest_load = '';
-    let quest_advancement = '';
-    let quest_start = '';
-    let quest_end_check = '';
-    let quest_end = '';
-
-    document.getElementById('attr.name').textContent = `${name}`;
+    document.getElementById('attr.name').textContent = `${VillagerName}`;
 
     // assemble json
     var object = {display:{},EntityTag:{}};
 
     // spawn egg display (name)
-    object.display = {Lore:[`{"text":"Name: ${name}","color":"gray","italic":false}`]};
+    object.display = {Lore:[`{"text":"Name: ${VillagerName}","color":"gray","italic":false}`]};
     
     // active effects
     //object.EntityTag = {ActiveEffects:[]}
@@ -79,7 +74,7 @@ function generate(quest) {
     //}
 
     // entity data
-    object.EntityTag.CustomName = `{"text":"${name}"}`;
+    object.EntityTag.CustomName = `{"text":"${VillagerName}"}`;
     object.EntityTag.NoAI = 1;
     object.EntityTag.Offers = {Recipes:[]};
 
@@ -92,64 +87,62 @@ function generate(quest) {
             for (let i in data[n]) {
                 // valid quest?
                 let match = false;
-                for (let t in data[n][i].quests) {
-                    if (data[n][i].quests[t] == quest) { match = true }
-                }
+                for (let t in data[n][i].quests) if (data[n][i].quests[t] == quest) match = true;
                 if (match == true) {
                     // if valid
 
                     // buy
-                    var buy_name = data[n][i].buy.id;
-                    var buy_description = '';
-                    var buy_model = '';
-                    var buy_quest = 0;
-                    var buy_enchants= [];
+                    var BuyItemName = data[n][i].buy.id;
+                    var BuyItemDescription = '';
+                    var BuyItemModel = '';
+                    var BuyItemQuestID = 0;
+                    var BuyItemEnchants= [];
                     // sell
-                    var sell_name = data[n][i].sell.id;
-                    var sell_description = '';
-                    var sell_model = '';
-                    var sell_quest = 0;
-                    var sell_enchants = [];
+                    var SellItemName = data[n][i].sell.id;
+                    var SellItemDescription = '';
+                    var SellItemModel = '';
+                    var SellItemQuestID = 0;
+                    var SellItemEnchants = [];
 
                     // advanced nbt
                     try {
-                        var buy_data = nbt('buy',{},n,i);
-                        var sell_data = nbt('sell',{},n,i);
+                        var TempBuyData = ParseNBT('buy',{},n,i);
+                        var TempSellData = ParseNBT('sell',{},n,i);
 
-                        buy_nbt = buy_data[0]
-                        sell_nbt = sell_data[0]
+                        BuyItemNBT = TempBuyData[0]
+                        SellItemNBT = TempSellData[0]
 
-                        if (buy_data[1] != '') { buy_name = buy_data[1] }
-                        if (buy_data[2] != '') { buy_description = buy_data[2] }
-                        if (buy_data[3] != '') { buy_model = buy_data[3] }
-                        if (buy_data[4] != '') {
-                            buy_quest = buy_data[4];
-                            let buy_advancement_temp = parse_advancement(data[n][i].buy.nbt.criteria,buy_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].buy);
+                        if (TempBuyData[1] != '') BuyItemName = TempBuyData[1];
+                        if (TempBuyData[2] != '') BuyItemDescription = TempBuyData[2];
+                        if (TempBuyData[3] != '') BuyItemModel = TempBuyData[3];
+                        if (TempBuyData[4] != '') {
+                            BuyItemQuestID = TempBuyData[4];
+                            let TempBuyDataAdvancement = CreateAdvancement(data[n][i].buy.nbt.criteria,TempBuyData[4],QuestAdvancement,QuestEndCheck,QuestEnd,data[n][i].buy);
 
-                            quest_advancement = buy_advancement_temp[0];
-                            quest_end_check = buy_advancement_temp[1];
-                            quest_end = buy_advancement_temp[2];
+                            QuestAdvancement = TempBuyDataAdvancement[0];
+                            QuestEndCheck = TempBuyDataAdvancement[1];
+                            QuestEnd = TempBuyDataAdvancement[2];
                         }
-                        if (buy_data[5] != '') { buy_enchants = buy_data[5] }
-                        if (buy_data[6] != '') { quest_generic = `${quest_generic}<br>${buy_data[6]}` }
-                        if (buy_data[7] != '') { quest_load = `${quest_load}<br>${buy_data[7]}` }
-                        if (buy_data[8] != '') { quest_start = `${quest_start}<br>${buy_data[8]}` }
+                        if (TempBuyData[5] != '') BuyItemEnchants = TempBuyData[5];
+                        if (TempBuyData[6] != '') QuestGeneric = `${QuestGeneric}<br>${TempBuyData[6]}`;
+                        if (TempBuyData[7] != '') QuestLoad = `${QuestLoad}<br>${TempBuyData[7]}`;
+                        if (TempBuyData[8] != '') QuestStart = `${QuestStart}<br>${TempBuyData[8]}`;
 
-                        if (sell_data[1] != '') { sell_name = sell_data[1] }
-                        if (sell_data[2] != '') { sell_description = sell_data[2] }
-                        if (sell_data[3] != '') { sell_model = sell_data[3] }
-                        if (sell_data[4] != '') {
-                            sell_quest = sell_data[4];
-                            let sell_advancement_temp = parse_advancement(data[n][i].sell.nbt.criteria,sell_data[4],quest_advancement,quest_end_check,quest_end,data[n][i].sell);
+                        if (TempSellData[1] != '') SellItemName = TempSellData[1];
+                        if (TempSellData[2] != '') SellItemDescription = TempSellData[2];
+                        if (TempSellData[3] != '') SellItemModel = TempSellData[3];
+                        if (TempSellData[4] != '') {
+                            SellItemQuestID = TempSellData[4];
+                            let TempSellDataAdvancement = CreateAdvancement(data[n][i].sell.nbt.criteria,TempSellData[4],QuestAdvancement,QuestEndCheck,QuestEnd,data[n][i].sell);
 
-                            quest_advancement = sell_advancement_temp[0];
-                            quest_end_check = sell_advancement_temp[1];
-                            quest_end = sell_advancement_temp[2];
+                            QuestAdvancement = TempSellDataAdvancement[0];
+                            QuestEndCheck = TempSellDataAdvancement[1];
+                            QuestEnd = TempSellDataAdvancement[2];
                         }
-                        if (sell_data[5] != '') { sell_enchants = sell_data[5] }
-                        if (sell_data[6] != '') { quest_generic = `${quest_generic}<br>${sell_data[6]}` }
-                        if (sell_data[7] != '') { quest_load = `${quest_load}<br>${sell_data[7]}` }
-                        if (sell_data[8] != '') { quest_start = `${quest_start}<br>${sell_data[8]}` }
+                        if (TempSellData[5] != '') SellItemEnchants = TempSellData[5];
+                        if (TempSellData[6] != '') QuestGeneric = `${QuestGeneric}<br>${TempSellData[6]}`;
+                        if (TempSellData[7] != '') QuestLoad = `${QuestLoad}<br>${TempSellData[7]}`;
+                        if (TempSellData[8] != '') QuestStart = `${QuestStart}<br>${TempSellData[8]}`;
                     } catch(error) {}
 
                     // buy & sell data
@@ -157,48 +150,48 @@ function generate(quest) {
 
                     // buy item
                     items.buy = {id:`${data[n][i].buy.id}`,Count:data[n][i].buy.count};
-                    if (typeof buy_nbt != 'undefined') { items.buy.tag = buy_nbt; }
+                    if (typeof BuyItemNBT != 'undefined') { items.buy.tag = BuyItemNBT; }
 
                     // sell item
                     items.sell = {id:`${data[n][i].sell.id}`,Count:data[n][i].sell.count};
-                    if (typeof sell_nbt != 'undefined') { items.sell.tag = sell_nbt; }
+                    if (typeof SellItemNBT != 'undefined') { items.sell.tag = SellItemNBT; }
 
-                    // disable locking trades
-                    items.priceMultipler = 0.0;
-                    items.maxUses = 2147483647;
-                    items.demand = 0;
-                    items.specialPrice = 0;
+                    // ensure trades cannot be locked
+                    items.priceMultipler = 0.0; // ensure price does not change
+                    items.maxUses = 2147483647; // set max amount of trade uses
+                    items.demand = 0; // set demand of item to 0
+                    items.specialPrice = 0; // set discount(?) price to +0
 
                     // append to offers
                     object.EntityTag.Offers.Recipes.push(items);
 
 
                     // visually display enchant in preview
-                    let buy_enchant = '';
-                    let sell_enchant = '';
+                    let BuyItemIsEnchanted = '';
+                    let SellItemIsEnchanted = '';
                     // check for enchants
-                    if (buy_enchants.length > 0) { buy_enchant = ' enchant'; }
-                    if (sell_enchants.length > 0) { sell_enchant = ' enchant'; }
+                    if (BuyItemEnchants.length > 0) { BuyItemIsEnchanted = ' enchant'; }
+                    if (SellItemEnchants.length > 0) { SellItemIsEnchanted = ' enchant'; }
 
                     // format enchants
-                    let format_buy_enchants = '';
-                    let format_sell_enchants = '';
-                    for (let e in buy_enchants) { format_buy_enchants = `${format_buy_enchants}${buy_enchants[e].id} ${buy_enchants[e].lvl} `; }
-                    for (let e in sell_enchants) { format_sell_enchants = `${format_sell_enchants}${sell_enchants[e].id} ${sell_enchants[e].lvl} `; }
+                    let FormatBuyItemEnchants = '';
+                    let FormatSellItemEnchants = '';
+                    for (let e in BuyItemEnchants) FormatBuyItemEnchants = `${FormatBuyItemEnchants}${BuyItemEnchants[e].id} ${BuyItemEnchants[e].lvl} `;
+                    for (let e in SellItemEnchants) FormatSellItemEnchants = `${FormatSellItemEnchants}${SellItemEnchants[e].id} ${SellItemEnchants[e].lvl} `;
 
                     // record
-                    let em_record = document.createElement('tr');
-                    em_record.innerHTML = (`
-                    <th class="icon${buy_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
-                    <th class="name has-tooltip${buy_enchant}" title="${buy_description} ${format_buy_enchants}">${buy_name}<label class="count">${data[n][i].buy.count}</label> <label class="count">Q${buy_quest}</label></th>
+                    let HTMLRecord = document.createElement('tr');
+                    HTMLRecord.innerHTML = (`
+                    <th class="icon${BuyItemIsEnchanted}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
+                    <th class="name has-tooltip${BuyItemIsEnchanted}" title="${BuyItemDescription} ${FormatBuyItemEnchants}">${BuyItemName}<label class="count">${data[n][i].buy.count}</label> <label class="count">Q${BuyItemQuestID}</label></th>
                     <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
-                    <th class="icon${sell_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
-                    <th class="name has-tooltip${sell_enchant}" title="${sell_description} ${format_sell_enchants}">${sell_name}<label class="count">${data[n][i].sell.count}</label> <label class="count">Q${sell_quest}</label></th>
+                    <th class="icon${SellItemIsEnchanted}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
+                    <th class="name has-tooltip${SellItemIsEnchanted}" title="${SellItemDescription} ${FormatSellItemEnchants}">${SellItemName}<label class="count">${data[n][i].sell.count}</label> <label class="count">Q${SellItemQuestID}</label></th>
                     `);
 
 
                     // append
-                    document.getElementById(`table-body`).appendChild(em_record);
+                    document.getElementById('table-body').appendChild(HTMLRecord);
                 }
                 feather.replace();
             }
@@ -208,34 +201,34 @@ function generate(quest) {
     // display output
     let output = `give @p villager_spawn_egg${JSON.stringify(object)}`;
     document.getElementById('output').innerHTML = `${output}`;
-    document.getElementById('output_generic').innerHTML = `${quest_generic}`;
-    document.getElementById('output_load').innerHTML = `${quest_load}`;
-    document.getElementById('output_advancement').innerHTML = `${quest_advancement}`;
-    document.getElementById('output_start').innerHTML = `${quest_start}`;
-    document.getElementById('output_end_check').innerHTML = `${quest_end_check}`;
-    document.getElementById('output_end').innerHTML = `${quest_end}`;
+    document.getElementById('output_generic').innerHTML = `${QuestGeneric}`;
+    document.getElementById('output_load').innerHTML = `${QuestLoad}`;
+    document.getElementById('output_advancement').innerHTML = `${QuestAdvancement}`;
+    document.getElementById('output_start').innerHTML = `${QuestStart}`;
+    document.getElementById('output_end_check').innerHTML = `${QuestEndCheck}`;
+    document.getElementById('output_end').innerHTML = `${QuestEnd}`;
 }
 
 // parse nbt
-function nbt(type,nbt,n,i) {
-    let custom_name = '';
-    let custom_description = '';
-    let custom_model = '';
-    let quest = 0;
-    let rewards;
-    let custom_enchants = [];
-    let quest_generic = '';
-    let quest_load = '';
-    let quest_start = '';
+function ParseNBT(type,nbt,n,i) {
+    let ItemName = '';
+    let ItemDescription = '';
+    let ItemModel = '';
+    let Quest = 0;
+    let Rewards;
+    let Enchantments = [];
+    let QuestGeneric = '';
+    let QuestLoad = '';
+    let QuestStart = '';
 
     for (let x in data[n][i][`${type}`].nbt) {
         if (x == 'name') {
             if (typeof nbt.display == 'undefined') { nbt.display = {} }
-            custom_name = data[n][i][`${type}`].nbt.name;
+            ItemName = data[n][i][`${type}`].nbt.name;
             nbt.display.Name = `{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow","italic":false}`;
         } else if (x == 'description') {
             if (typeof nbt.display == 'undefined') { nbt.display = {} }
-            custom_description = data[n][i][`${type}`].nbt.description;
+            ItemDescription = data[n][i][`${type}`].nbt.description;
             nbt.display.Lore = [];
 
             for (let c in data[n][i][`${type}`].nbt.description) {
@@ -258,7 +251,7 @@ function nbt(type,nbt,n,i) {
         } else if (x == 'rewards') {
             if (typeof nbt.display == 'undefined') { nbt.display = {} }
             if (typeof nbt.display.Lore == 'undefined') { nbt.display.Lore = [] }
-            rewards = data[n][i][`${type}`].nbt.rewards;
+            Rewards = data[n][i][`${type}`].nbt.rewards;
 
             // header
             nbt.display.Lore.push(`${JSON.stringify({"text":"Rewards:","color":"gold","italic":false})}`);
@@ -268,30 +261,30 @@ function nbt(type,nbt,n,i) {
                 nbt.display.Lore.push(`${JSON.stringify({"text":`${data[n][i][`${type}`].nbt.rewards[c].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}`,"color":"yellow","italic":false})}`);
             }
         } else if (x == 'model') {
-            custom_model = data[n][i][`${type}`].nbt.model;
-            nbt.CustomModelData = data[n][i][`${type}`].nbt.model;
+            ItemModel = data[n][i][`${type}`].nbt.model;
+            nbt.ItemModelData = data[n][i][`${type}`].nbt.model;
         } else if (x == 'quest_id') {
-            quest = data[n][i][`${type}`].nbt.quest_id;
-            nbt.QuestID = data[n][i][`${type}`].nbt.quest_id;
+            Quest = data[n][i][`${type}`].nbt.quest_id;
+            nbt.quest_id = data[n][i][`${type}`].nbt.quest_id;
             // generic quest list
-            quest_generic = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start
+            QuestGeneric = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start
             <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1
             <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start`;
-            quest_start = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start
+            QuestStart = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start
             <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}\n","color":"yellow"}]
             <br>clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1
             <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1<br>`;
-            quest_load = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
+            QuestLoad = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
         } else if (x == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
-            custom_enchants = data[n][i][`${type}`].nbt.enchants;
+            Enchantments = data[n][i][`${type}`].nbt.enchants;
             for (let e in data[n][i][`${type}`].nbt.enchants) {
                 nbt.Enchantments.push({id:`minecraft:${data[n][i][`${type}`].nbt.enchants[e].id}`,lvl:data[n][i][`${type}`].nbt.enchants[e].lvl});
             }
         }
     }
 
-    return [nbt,custom_name,custom_description,custom_model,quest,custom_enchants,quest_generic,quest_load,quest_start];
+    return [nbt,ItemName,ItemDescription,ItemModel,Quest,Enchantments,QuestGeneric,QuestLoad,QuestStart];
 }
 
 // copy
@@ -303,11 +296,11 @@ function copy() {
 }
 
 // generate advancement files
-function parse_advancement(criteria,quest_id,quest_advancement,quest_end_check,quest_end,item) {
+function CreateAdvancement(criteria,QuestID,QuestAdvancement,QuestEndCheck,QuestEnd,item) {
     let advancement = {display:{},criteria:{},rewards:{}};
 
     advancement.display.title = {"text": `${item.nbt.name} (quest)`};
-    advancement.display.description = {"text": `Quest ${quest_id}`};
+    advancement.display.description = {"text": `Quest ${QuestID}`};
     advancement.display.icon = {"item": `minecraft:${item.id}`};
 
     advancement.display.show_toast = false;
@@ -315,18 +308,18 @@ function parse_advancement(criteria,quest_id,quest_advancement,quest_end_check,q
     advancement.display.hidden = true;
 
     advancement.criteria = criteria;
-    advancement.rewards.function = `sp:system/quest/${quest_id}/end_check`;
+    advancement.rewards.function = `sp:system/quest/${QuestID}/end_check`;
 
-    quest_advancement = `${quest_advancement}quest ${quest_id}<br>${JSON.stringify(advancement)}<br><br>`;
-    quest_end_check = `${quest_end_check}## quest ${quest_id}<br>execute if score @s quest_${quest_id} matches 1.. run function sp:system/quest/${quest_id}/end<br>execute unless score @s quest_${quest_id} matches 1.. run advancement revoke @s only sp:quest_${quest_id}<br><br>`;
+    QuestAdvancement = `${QuestAdvancement}quest ${QuestID}<br>${JSON.stringify(advancement)}<br><br>`;
+    QuestEndCheck = `${QuestEndCheck}## quest ${QuestID}<br>execute if score @s quest_${QuestID} matches 1.. run function sp:system/quest/${QuestID}/end<br>execute unless score @s quest_${QuestID} matches 1.. run advancement revoke @s only sp:quest_${QuestID}<br><br>`;
     
-    quest_end = `${quest_end}## quest ${quest_id}<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"}]`;
+    QuestEnd = `${QuestEnd}## quest ${QuestID}<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"}]`;
     for (let i in item.nbt.rewards) {
-        quest_end = `${quest_end}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}`;
+        QuestEnd = `${QuestEnd}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}`;
         let ItemID = item.nbt.rewards[i].id;
-        quest_end = `${quest_end}<br>tellraw @s [" "," "," ",{"text":" + ","color":"dark_gray"},{"text":" ${item.nbt.rewards[i].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}"}]`;
+        QuestEnd = `${QuestEnd}<br>tellraw @s [" "," "," ",{"text":" + ","color":"dark_gray"},{"text":" ${item.nbt.rewards[i].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}"}]`;
     }
-    quest_end = `${quest_end}<br>tellraw @s ""<br><br>`;
+    QuestEnd = `${QuestEnd}<br>tellraw @s ""<br><br>`;
 
-    return [quest_advancement,quest_end_check,quest_end];
+    return [QuestAdvancement,QuestEndCheck,QuestEnd];
 }
