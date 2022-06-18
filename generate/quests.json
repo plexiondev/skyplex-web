@@ -42,7 +42,7 @@
                     "description": [{"text":"don't you love bread","color":"gray","italic":false}],
                     "quest_id": 2,
                     "criteria": {
-                        "stone": {
+                        "bread": {
                             "trigger": "minecraft:consume_item",
                             "description": "Eat some bread",
                             "conditions": {
@@ -57,6 +57,40 @@
                         }
                     },
                     "rewards": [{"id":"bread","count":128}]
+                }
+            },
+            "quests": ["test"]
+        },
+        {
+            "buy": { "id": "gold_nugget", "count": 1 },
+            "sell": {
+                "id": "emerald",
+                "count": 1,
+                "nbt": {
+                    "name": "Ben's Lucky Sword",
+                    "description": [{"text":"The final test, i think","color":"gray","italic":false}],
+                    "quest_id": 3,
+                    "criteria": {
+                        "beacon": {
+                            "trigger": "minecraft:construct_beacon",
+                            "description": "Construct a beacon"
+                        },
+                        "have_a_dive": {
+                            "trigger": "minecraft:enter_block",
+                            "description": "Have a dive",
+                            "conditions": {
+                                "block": "water"
+                            }
+                        },
+                        "builder": {
+                            "trigger": "minecraft:placed_block",
+                            "description": "Become a builder",
+                            "conditions": {
+                                "block": "bricks"
+                            }
+                        }
+                    },
+                    "rewards": [{"id":"barrier","count":10},{"id":"structure_void","count":1},{"id":"leather_boots","count":1}]
                 }
             },
             "quests": ["test"]
