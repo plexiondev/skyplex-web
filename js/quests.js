@@ -170,8 +170,9 @@ function generate(quest) {
                     let BuyItemIsEnchanted = '';
                     let SellItemIsEnchanted = '';
                     // check for enchants
-                    if (BuyItemEnchants.length > 0) { BuyItemIsEnchanted = ' enchant'; }
-                    if (SellItemEnchants.length > 0) { SellItemIsEnchanted = ' enchant'; }
+                    // will append the class `enchant` if present
+                    if (BuyItemEnchants.length > 0) BuyItemIsEnchanted = ' enchant';
+                    if (SellItemEnchants.length > 0) SellItemIsEnchanted = ' enchant';
 
                     // format enchants
                     let FormatBuyItemEnchants = '';
