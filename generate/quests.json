@@ -16,6 +16,7 @@
                     "criteria": {
                         "stone": {
                             "trigger": "minecraft:inventory_changed",
+                            "description": "Obtain 1x Stone",
                             "conditions": {
                                 "items": [
                                     {
