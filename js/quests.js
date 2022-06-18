@@ -3,6 +3,8 @@
 
 let data;
 select();
+let ItemDB;
+LoadItems();
 
 // fill up select
 function select() {
@@ -22,6 +24,14 @@ function select() {
 
 function call_gen() {
     generate(document.getElementById('trade').value);
+}
+
+
+function LoadItems() {
+    // loads in a (legacy) minecraft item db
+    $.get('/js/items_by_name.json',function(response) {
+        ItemDB = response;
+    });
 }
 
 
@@ -240,7 +250,8 @@ function nbt(type,nbt,n,i) {
             nbt.display.Lore.push(`${JSON.stringify({"text":"Rewards:","color":"gold","italic":false})}`);
 
             for (let c in data[n][i][`${type}`].nbt.rewards) {
-                nbt.display.Lore.push(`${JSON.stringify({"text":`${data[n][i][`${type}`].nbt.rewards[c].count} ${data[n][i][`${type}`].nbt.rewards[c].id}`,"color":"yellow","italic":false})}`);
+                let ItemID = data[n][i][`${type}`].nbt.rewards[c].id;
+                nbt.display.Lore.push(`${JSON.stringify({"text":`${data[n][i][`${type}`].nbt.rewards[c].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}`,"color":"yellow","italic":false})}`);
             }
         } else if (x == 'model') {
             custom_model = data[n][i][`${type}`].nbt.model;
