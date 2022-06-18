@@ -232,7 +232,7 @@ function nbt(type,nbt,n,i) {
         if (x == 'name') {
             if (typeof nbt.display == 'undefined') { nbt.display = {} }
             custom_name = data[n][i][`${type}`].nbt.name;
-            nbt.display.Name = `{"text":"${data[n][i][`${type}`].nbt.name}","italic":false}`;
+            nbt.display.Name = `{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow","italic":false}`;
         } else if (x == 'description') {
             if (typeof nbt.display == 'undefined') { nbt.display = {} }
             custom_description = data[n][i][`${type}`].nbt.description;
@@ -241,6 +241,20 @@ function nbt(type,nbt,n,i) {
             for (let c in data[n][i][`${type}`].nbt.description) {
                 nbt.display.Lore.push(`${JSON.stringify(data[n][i][`${type}`].nbt.description[c])}`);
             }
+        } else if (x == 'criteria') {
+            if (typeof nbt.display == 'undefined') { nbt.display = {} }
+            if (typeof nbt.display.Lore == 'undefined') { nbt.display.Lore = [] }
+
+            // header
+            nbt.display.Lore.push(`${JSON.stringify({"text":""})}`);
+            nbt.display.Lore.push(`${JSON.stringify({"text":"Criteria:","color":"gold","italic":false})}`);
+
+            for (let c in data[n][i][`${type}`].nbt.criteria) {
+                nbt.display.Lore.push(`${JSON.stringify({"text":`${data[n][i][`${type}`].nbt.criteria[c].description}`,"color":"white","italic":false})}`);
+            }
+
+            // footer
+            nbt.display.Lore.push(`${JSON.stringify({"text":""})}`);
         } else if (x == 'rewards') {
             if (typeof nbt.display == 'undefined') { nbt.display = {} }
             if (typeof nbt.display.Lore == 'undefined') { nbt.display.Lore = [] }

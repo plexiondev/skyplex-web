@@ -11,12 +11,11 @@
                 "nbt": {
                     "name": "Cool quest",
                     "description": [{"text":"it is so awesome","color":"gray","italic":false},{"text":"try it now","color":"gray","italic":false}],
-                    "rewards": [{"id":"gold_nugget","count":64}],
                     "quest_id": 1,
                     "criteria": {
                         "stone": {
                             "trigger": "minecraft:inventory_changed",
-                            "description": "Obtain 1x Stone",
+                            "description": "Get some stone",
                             "conditions": {
                                 "items": [
                                     {
@@ -27,7 +26,37 @@
                                 ]
                             }
                         }
-                    }
+                    },
+                    "rewards": [{"id":"gold_nugget","count":64}]
+                }
+            },
+            "quests": ["test"]
+        },
+        {
+            "buy": { "id": "gold_nugget", "count": 10 },
+            "sell": {
+                "id": "emerald",
+                "count": 1,
+                "nbt": {
+                    "name": "mfw bread",
+                    "description": [{"text":"don't you love bread","color":"gray","italic":false}],
+                    "quest_id": 2,
+                    "criteria": {
+                        "stone": {
+                            "trigger": "minecraft:consume_item",
+                            "description": "Eat some bread",
+                            "conditions": {
+                                "items": [
+                                    {
+                                        "items": [
+                                            "minecraft:bread"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "rewards": [{"id":"bread","count":128}]
                 }
             },
             "quests": ["test"]
