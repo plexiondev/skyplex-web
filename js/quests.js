@@ -250,7 +250,7 @@ function nbt(type,nbt,n,i) {
             nbt.QuestID = data[n][i][`${type}`].nbt.quest_id;
             // generic quest list
             quest_generic = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1<br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} run clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1`;
-            quest_start = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start<br>tellraw @s ["\n",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}\n","color":"yellow"}]`;
+            quest_start = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}\n","color":"yellow"}]`;
             quest_load = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
         } else if (x == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
@@ -290,7 +290,7 @@ function parse_advancement(criteria,quest_id,quest_advancement,quest_end_check,q
     quest_advancement = `${quest_advancement}quest ${quest_id}<br>${JSON.stringify(advancement)}<br><br>`;
     quest_end_check = `${quest_end_check}## quest ${quest_id}<br>execute if score @s quest_${quest_id} matches 1.. run function sp:system/quest/${quest_id}/end<br>execute unless score @s quest_${quest_id} matches 1.. run advancement revoke @s only sp:quest_${quest_id}<br><br>`;
     
-    quest_end = `${quest_end}## quest ${quest_id}<br>tellraw @s ["\n",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"}]`;
+    quest_end = `${quest_end}## quest ${quest_id}<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"}]`;
     for (let i in item.nbt.rewards) {
         quest_end = `${quest_end}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}`;
         quest_end = `${quest_end}<br>tellraw @s [" "," "," ",{"text":" + ","color":"dark_gray"},{"text":" ${item.nbt.rewards[i].count}x ${item.nbt.rewards[i].id}"}]`;
