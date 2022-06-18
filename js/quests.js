@@ -276,10 +276,11 @@ function nbt(type,nbt,n,i) {
             // generic quest list
             quest_generic = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start
             <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1
-            <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start
-            <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1
-            <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1`;
-            quest_start = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}\n","color":"yellow"}]<br>`;
+            <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start`;
+            quest_start = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># start
+            <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}\n","color":"yellow"}]
+            <br>clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1
+            <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1<br>`;
             quest_load = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
         } else if (x == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
