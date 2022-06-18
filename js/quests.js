@@ -304,7 +304,8 @@ function parse_advancement(criteria,quest_id,quest_advancement,quest_end_check,q
     quest_end = `${quest_end}## quest ${quest_id}<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"}]`;
     for (let i in item.nbt.rewards) {
         quest_end = `${quest_end}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}`;
-        quest_end = `${quest_end}<br>tellraw @s [" "," "," ",{"text":" + ","color":"dark_gray"},{"text":" ${item.nbt.rewards[i].count}x ${item.nbt.rewards[i].id}"}]`;
+        let ItemID = item.nbt.rewards[i].id;
+        quest_end = `${quest_end}<br>tellraw @s [" "," "," ",{"text":" + ","color":"dark_gray"},{"text":" ${item.nbt.rewards[i].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}"}]`;
     }
     quest_end = `${quest_end}<br>tellraw @s ""<br><br>`;
 
