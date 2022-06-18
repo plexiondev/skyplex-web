@@ -92,26 +92,30 @@ function generate(quest) {
                     // if valid
 
                     // buy
-                    var BuyItemName = data[n][i].buy.id;
-                    var BuyItemDescription = '';
-                    var BuyItemModel = '';
-                    var BuyItemQuestID = 0;
-                    var BuyItemEnchants= [];
+                    let BuyItemName = data[n][i].buy.id;
+                    let BuyItemDescription = '';
+                    let BuyItemModel = '';
+                    let BuyItemQuestID = 0;
+                    let BuyItemEnchants= [];
                     // sell
-                    var SellItemName = data[n][i].sell.id;
-                    var SellItemDescription = '';
-                    var SellItemModel = '';
-                    var SellItemQuestID = 0;
-                    var SellItemEnchants = [];
+                    let SellItemName = data[n][i].sell.id;
+                    let SellItemDescription = '';
+                    let SellItemModel = '';
+                    let SellItemQuestID = 0;
+                    let SellItemEnchants = [];
 
                     // advanced nbt
                     try {
-                        var TempBuyData = ParseNBT('buy',{},n,i);
-                        var TempSellData = ParseNBT('sell',{},n,i);
+                        // parse nbt
+                        let TempBuyData = ParseNBT('buy',{},n,i);
+                        let TempSellData = ParseNBT('sell',{},n,i);
 
+                        // save nbt for buy & sell
+                        // (taken from response)
                         BuyItemNBT = TempBuyData[0]
                         SellItemNBT = TempSellData[0]
 
+                        // extract buy item data
                         if (TempBuyData[1] != '') BuyItemName = TempBuyData[1];
                         if (TempBuyData[2] != '') BuyItemDescription = TempBuyData[2];
                         if (TempBuyData[3] != '') BuyItemModel = TempBuyData[3];
@@ -128,6 +132,7 @@ function generate(quest) {
                         if (TempBuyData[7] != '') QuestLoad = `${QuestLoad}<br>${TempBuyData[7]}`;
                         if (TempBuyData[8] != '') QuestStart = `${QuestStart}<br>${TempBuyData[8]}`;
 
+                        // extract sell item data
                         if (TempSellData[1] != '') SellItemName = TempSellData[1];
                         if (TempSellData[2] != '') SellItemDescription = TempSellData[2];
                         if (TempSellData[3] != '') SellItemModel = TempSellData[3];
@@ -146,7 +151,7 @@ function generate(quest) {
                     } catch(error) {}
 
                     // buy & sell data
-                    var items = {};
+                    let items = {};
 
                     // buy item
                     items.buy = {id:`${data[n][i].buy.id}`,Count:data[n][i].buy.count};
@@ -216,28 +221,26 @@ function ParseNBT(type,nbt,n,i) {
     let ItemDescription = '';
     let ItemModel = '';
     let Quest = 0;
-    let Rewards;
     let Enchantments = [];
     let QuestGeneric = '';
     let QuestLoad = '';
     let QuestStart = '';
 
-    for (let x in data[n][i][`${type}`].nbt) {
-        if (x == 'name') {
-            if (typeof nbt.display == 'undefined') { nbt.display = {} }
+    for (let Property in data[n][i][`${type}`].nbt) {
+        if (Property == 'name') {
+            if (typeof nbt.display == 'undefined') nbt.display = {};
             ItemName = data[n][i][`${type}`].nbt.name;
             nbt.display.Name = `{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow","italic":false}`;
-        } else if (x == 'description') {
-            if (typeof nbt.display == 'undefined') { nbt.display = {} }
+        } else if (Property == 'description') {
+            if (typeof nbt.display == 'undefined') nbt.display = {};
             ItemDescription = data[n][i][`${type}`].nbt.description;
             nbt.display.Lore = [];
 
-            for (let c in data[n][i][`${type}`].nbt.description) {
+            for (let c in data[n][i][`${type}`].nbt.description)
                 nbt.display.Lore.push(`${JSON.stringify(data[n][i][`${type}`].nbt.description[c])}`);
-            }
-        } else if (x == 'criteria') {
-            if (typeof nbt.display == 'undefined') { nbt.display = {} }
-            if (typeof nbt.display.Lore == 'undefined') { nbt.display.Lore = [] }
+        } else if (Property == 'criteria') {
+            if (typeof nbt.display == 'undefined') nbt.display = {};
+            if (typeof nbt.display.Lore == 'undefined') nbt.display.Lore = [];
 
             // header
             nbt.display.Lore.push(`${JSON.stringify({"text":""})}`);
@@ -249,10 +252,9 @@ function ParseNBT(type,nbt,n,i) {
 
             // footer
             nbt.display.Lore.push(`${JSON.stringify({"text":""})}`);
-        } else if (x == 'rewards') {
-            if (typeof nbt.display == 'undefined') { nbt.display = {} }
-            if (typeof nbt.display.Lore == 'undefined') { nbt.display.Lore = [] }
-            Rewards = data[n][i][`${type}`].nbt.rewards;
+        } else if (Property == 'rewards') {
+            if (typeof nbt.display == 'undefined') nbt.display = {};
+            if (typeof nbt.display.Lore == 'undefined') nbt.display.Lore = [];
 
             // header
             nbt.display.Lore.push(`${JSON.stringify({"text":"Rewards:","color":"gold","italic":false})}`);
@@ -261,10 +263,10 @@ function ParseNBT(type,nbt,n,i) {
                 let ItemID = data[n][i][`${type}`].nbt.rewards[c].id;
                 nbt.display.Lore.push(`${JSON.stringify({"text":`${data[n][i][`${type}`].nbt.rewards[c].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}`,"color":"yellow","italic":false})}`);
             }
-        } else if (x == 'model') {
+        } else if (Property == 'model') {
             ItemModel = data[n][i][`${type}`].nbt.model;
             nbt.ItemModelData = data[n][i][`${type}`].nbt.model;
-        } else if (x == 'quest_id') {
+        } else if (Property == 'quest_id') {
             Quest = data[n][i][`${type}`].nbt.quest_id;
             nbt.quest_id = data[n][i][`${type}`].nbt.quest_id;
             // generic quest list
@@ -276,12 +278,11 @@ function ParseNBT(type,nbt,n,i) {
             <br>clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1
             <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1<br>`;
             QuestLoad = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
-        } else if (x == 'enchants') {
-            if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
+        } else if (Property == 'enchants') {
+            if (typeof nbt.Enchantments == 'undefined') nbt.Enchantments = [];
             Enchantments = data[n][i][`${type}`].nbt.enchants;
-            for (let e in data[n][i][`${type}`].nbt.enchants) {
+            for (let e in data[n][i][`${type}`].nbt.enchants)
                 nbt.Enchantments.push({id:`minecraft:${data[n][i][`${type}`].nbt.enchants[e].id}`,lvl:data[n][i][`${type}`].nbt.enchants[e].lvl});
-            }
         }
     }
 
@@ -290,10 +291,8 @@ function ParseNBT(type,nbt,n,i) {
 
 // copy
 function copy() {
-    var selector = document.getElementById('output');
-
     // write to clipboard
-    navigator.clipboard.writeText(selector.textContent);
+    navigator.clipboard.writeText(document.getElementById('output').textContent);
 }
 
 // generate advancement files
