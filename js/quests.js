@@ -273,9 +273,7 @@ function ParseNBT(type,nbt,n,i) {
             <br># sfx
             <br>playsound minecraft:entity.experience_orb.pickup player @s
             <br># display
-            <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow"}]
-            <br>tellraw @s ""
-            <br>tellraw @s {"text":"Criteria:","color":"gold"}`;
+            <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow"},{"text":"\\n\\nCriteria:","color":"gold"}]`;
             
             // criteria
             for (let c in data[n][i][`${type}`].nbt.criteria) {
@@ -323,9 +321,7 @@ function CreateAdvancement(criteria,QuestID,QuestAdvancement,QuestEndCheck,Quest
     
     // start
     QuestEnd = `${QuestEnd}## quest ${QuestID}
-    <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"}]
-    <br>tellraw @s ""
-    <br>tellraw @s {"text":"Rewards:","color":"gold"}`;
+    <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"},{"text":"\\n\\nRewards:","color":"gold"}]`;
 
     // rewards
     for (let i in item.nbt.rewards) {
