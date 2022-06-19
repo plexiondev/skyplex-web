@@ -268,8 +268,8 @@ function ParseNBT(type,nbt,n,i) {
             // start
             QuestStart = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># stats
             <br>clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1
-            <br># sfx<br>playsound minecraft:entity.experience_orb.pickup player @s<br>
-            <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1<br># display
+            <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1
+            <br># sfx<br>playsound minecraft:entity.experience_orb.pickup player @s<br># display
             <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow"},{"text":"\n\nCriteria:","color":"gold"}]`;
             
             // criteria
