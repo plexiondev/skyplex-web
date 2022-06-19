@@ -189,10 +189,10 @@ function generate(quest) {
                     let HTMLRecord = document.createElement('tr');
                     HTMLRecord.innerHTML = (`
                     <th class="icon${BuyItemIsEnchanted}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
-                    <th class="name has-tooltip${BuyItemIsEnchanted}" title="${BuyItemDescription} ${FormatBuyItemEnchants}">${BuyItemName}<label class="count">${data[n][i].buy.count}</label> <label class="count">Q${BuyItemQuestID}</label></th>
+                    <th class="name ${BuyItemIsEnchanted}" title="${BuyItemDescription} ${FormatBuyItemEnchants}">${BuyItemName}<label class="count">${data[n][i].buy.count}</label> <label class="count">Q${BuyItemQuestID}</label></th>
                     <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
                     <th class="icon${SellItemIsEnchanted}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
-                    <th class="name has-tooltip${SellItemIsEnchanted}" title="${SellItemDescription} ${FormatSellItemEnchants}">${SellItemName}<label class="count">${data[n][i].sell.count}</label> <label class="count">Q${SellItemQuestID}</label></th>
+                    <th class="name ${SellItemIsEnchanted}" title="${SellItemDescription} ${FormatSellItemEnchants}">${SellItemName}<label class="count">${data[n][i].sell.count}</label> <label class="count">Q${SellItemQuestID}</label></th>
                     `);
 
 
