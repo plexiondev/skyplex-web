@@ -268,6 +268,7 @@ function ParseNBT(type,nbt,n,i) {
             // start
             QuestStart = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># stats
             <br>clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1
+            <br># sfx<br>playsound minecraft:entity.experience_orb.pickup player @s<br>
             <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1<br># display
             <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow"},{"text":"\n\nCriteria:","color":"gold"}]`;
             
@@ -317,13 +318,16 @@ function CreateAdvancement(criteria,QuestID,QuestAdvancement,QuestEndCheck,Quest
     
     // start
     QuestEnd = `${QuestEnd}## quest ${QuestID}<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"},{"text":"\n\nRewards:","color":"gold"}]`;
-    
+
     // rewards
     for (let i in item.nbt.rewards) {
         QuestEnd = `${QuestEnd}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}`;
         let ItemID = item.nbt.rewards[i].id;
         QuestEnd = `${QuestEnd}<br>tellraw @s {"text":"${item.nbt.rewards[i].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}","color":"yellow"}`;
     }
+
+    // sfx
+    QuestEnd = `${QuestEnd}<br>playsound minecraft:entity.player.levelup player @s`;
 
     // end
     QuestEnd = `${QuestEnd}<br>tellraw @s ""<br><br>`;
