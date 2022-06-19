@@ -1,6 +1,7 @@
 {
     "quests": [
-        { "id": "test", "name": "Test quest", "profession": "blacksmith" }
+        { "id": "test", "name": "Test quest", "profession": "blacksmith" },
+        { "id": "oscar", "name": "Oscar", "profession": "blacksmith" }
     ],
     "test": [
         {
@@ -94,6 +95,61 @@
                 }
             },
             "quests": ["test"]
+        },
+        {
+            "buy": { "id": "emerald", "count": 1 },
+            "sell": {
+                "id": "nether_star",
+                "count": 1,
+                "nbt": {
+                    "name": "Oscar's adventure",
+                    "description": [{"text":"He needs sticks for some reason.","color":"gray","italic":false}],
+                    "quest_id": 4,
+                    "criteria": {
+                        "sticks": {
+                            "trigger": "minecraft:inventory_changed",
+                            "description": "Collect 5 sticks",
+                            "conditions": {
+                                "items": [
+                                    {
+                                        "items": [
+                                            "minecraft:stick"
+                                        ],
+                                        "count": {
+                                            "min": 5
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "in_proxim_villager": {
+                            "trigger": "minecraft:location",
+                            "description": "Meet back up with Oscar",
+                            "conditions": {
+                                "location": {
+                                    "dimension": "minecraft:overworld",
+                                    "position": {
+                                        "x": {
+                                            "min": -25,
+                                            "max": -20
+                                        },
+                                        "y": {
+                                            "min": 100,
+                                            "max": 102
+                                        },
+                                        "z": {
+                                            "min": -39,
+                                            "max": -35
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "rewards": [{"id":"gold_nugget","count":10},{"id":"emerald","count":1}]
+                }
+            },
+            "quests": ["oscar"]
         }
     ]
 }
