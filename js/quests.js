@@ -259,7 +259,7 @@ function ParseNBT(type,nbt,n,i) {
             nbt.ItemModelData = data[n][i][`${type}`].nbt.model;
         } else if (Property == 'quest_id') {
             Quest = data[n][i][`${type}`].nbt.quest_id;
-            nbt.quest_id = data[n][i][`${type}`].nbt.quest_id;
+            nbt.QuestID = data[n][i][`${type}`].nbt.quest_id;
             // generic quest list
             QuestGeneric = `## quest ${data[n][i][`${type}`].nbt.quest_id}
             <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1
