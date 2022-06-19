@@ -38,16 +38,7 @@ function LoadItems() {
 // generate
 function generate(quest) {
     document.getElementById('output').innerHTML = '';
-    document.getElementById('table-body').innerHTML = (`
-    <tr>
-        <th></th>
-        <th>Name</th>
-        <th class="arrow-get"></th>
-        <th></th>
-        <th>Name</th>
-        <th></th>
-    </tr>
-    `);
+    document.getElementById('table-body').innerHTML = '';
 
     let VillagerName;
     for (let i in data.quests) if (data.quests[i].id == quest) VillagerName = data.quests[i].name;
