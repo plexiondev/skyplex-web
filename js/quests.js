@@ -266,11 +266,16 @@ function ParseNBT(type,nbt,n,i) {
             <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start`;
             
             // start
-            QuestStart = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br># stats
+            QuestStart = `## quest ${data[n][i][`${type}`].nbt.quest_id}
+            <br># stats
             <br>clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1
             <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1
-            <br># sfx<br>playsound minecraft:entity.experience_orb.pickup player @s<br># display
-            <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow"},{"text":"\n\nCriteria:","color":"gold"}]`;
+            <br># sfx
+            <br>playsound minecraft:entity.experience_orb.pickup player @s
+            <br># display
+            <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest started! ","color":"gold"},{"text":"${data[n][i][`${type}`].nbt.name}","color":"yellow"}]
+            <br>tellraw @s ""
+            <br>tellraw @s {"text":"Criteria:","color":"gold"}`;
             
             // criteria
             for (let c in data[n][i][`${type}`].nbt.criteria) {
@@ -317,7 +322,10 @@ function CreateAdvancement(criteria,QuestID,QuestAdvancement,QuestEndCheck,Quest
     QuestEndCheck = `${QuestEndCheck}## quest ${QuestID}<br>execute if score @s quest_${QuestID} matches 1.. run function sp:system/quest/${QuestID}/end<br>execute unless score @s quest_${QuestID} matches 1.. run advancement revoke @s only sp:quest_${QuestID}<br><br>`;
     
     // start
-    QuestEnd = `${QuestEnd}## quest ${QuestID}<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"},{"text":"\n\nRewards:","color":"gold"}]`;
+    QuestEnd = `${QuestEnd}## quest ${QuestID}
+    <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"}]
+    <br>tellraw @s ""
+    <br>tellraw @s {"text":"Rewards:","color":"gold"}`;
 
     // rewards
     for (let i in item.nbt.rewards) {
