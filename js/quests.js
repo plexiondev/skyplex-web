@@ -315,12 +315,17 @@ function CreateAdvancement(criteria,QuestID,QuestAdvancement,QuestEndCheck,Quest
     QuestAdvancement = `${QuestAdvancement}quest ${QuestID}<br>${JSON.stringify(advancement)}<br><br>`;
     QuestEndCheck = `${QuestEndCheck}## quest ${QuestID}<br>execute if score @s quest_${QuestID} matches 1.. run function sp:system/quest/${QuestID}/end<br>execute unless score @s quest_${QuestID} matches 1.. run advancement revoke @s only sp:quest_${QuestID}<br><br>`;
     
+    // start
     QuestEnd = `${QuestEnd}## quest ${QuestID}<br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"},{"text":"\n\nRewards:","color":"gold"}]`;
+    
+    // rewards
     for (let i in item.nbt.rewards) {
         QuestEnd = `${QuestEnd}<br>give @s minecraft:${item.nbt.rewards[i].id} ${item.nbt.rewards[i].count}`;
         let ItemID = item.nbt.rewards[i].id;
         QuestEnd = `${QuestEnd}<br>tellraw @s {"text":"${item.nbt.rewards[i].count}x ${ItemDB[`${ItemID.replaceAll('_',' ')}`].name}","color":"yellow"}`;
     }
+
+    // end
     QuestEnd = `${QuestEnd}<br>tellraw @s ""<br><br>`;
 
     return [QuestAdvancement,QuestEndCheck,QuestEnd];
