@@ -27,8 +27,8 @@
             text_load = `${text_load}<br><br># ${n}`;
 
             for (let i in data[n]) {
-                text_main = (`${text_main}<br>execute if score @s sp${n}.${data[n][i].name} matches 1.. run scoreboard players operation @s lvl.${n}.progress += ${n}.${data[n][i].name} lvl.rates`);
-                text_load = (`${text_load}<br>scoreboard players set ${n}.${data[n][i].name} lvl.rates ${data[n][i].level}`);
+                text_main = `${text_main}<br>execute if score @s sp${n}.${data[n][i].name} matches 1.. run scoreboard players operation @s lvl.${n}.progress += ${n}.${data[n][i].name} lvl.rates`;
+                text_load = `${text_load}<br>scoreboard players set ${n}.${data[n][i].name} lvl.rates ${data[n][i].level}`;
             }
         }
 
