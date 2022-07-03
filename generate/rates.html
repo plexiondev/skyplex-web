@@ -18,34 +18,21 @@
 <div id="sp:load"></div>
 <script>
     $.get('rates.json',function(data) {
-        // sp:level/main
-        let text = "";
-        // mining
-        text = `${text}<br><br># mining`
-        for (let i in data.mine) {
-            text = (`${text}<br>execute if score @s spmine.${data.mine[i].name} matches 1.. run scoreboard players operation @s lvl.mine.progress += mine.${data.mine[i].name} lvl.rates`);
-        }
-        // fishing
-        text = `${text}<br><br># fishing`
-        for (let i in data.fish) {
-            text = (`${text}<br>execute if score @s spfish.${data.fish[i].name} matches 1.. run scoreboard players operation @s lvl.fish.progress += fish.${data.fish[i].name} lvl.rates`);
+        // run through data
+        let text_main = ''; // sp:level/main
+        let text_load = ''; // sp:load
+
+        for (let n in data) {
+            text_main = `${text_main}<br><br># ${n}`;
+            text_load = `${text_load}<br><br># ${n}`;
+
+            for (let i in data[n]) {
+                text_main = (`${text_main}<br>execute if score @s sp${n}.${data[n][i].name} matches 1.. run scoreboard players operation @s lvl.${n}.progress += ${n}.${data[n][i].name} lvl.rates`);
+                text_load = (`${text_load}<br>scoreboard players set ${n}.${data[n][i].name} lvl.rates ${data[n][i].level}`);
+            }
         }
 
-        document.getElementById('sp:level/main').innerHTML = (`${text}`);
-
-        // sp:load
-        let text2 = "";
-        // mining
-        text2 = `${text2}<br><br># mining`
-        for (let i in data.mine) {
-            text2 = (`${text2}<br>scoreboard players set mine.${data.mine[i].name} lvl.rates ${data.mine[i].level}`);
-        }
-        // fishing
-        text2 = `${text2}<br><br># fishing`
-        for (let i in data.fish) {
-            text2 = (`${text2}<br>scoreboard players set fish.${data.fish[i].name} lvl.rates ${data.fish[i].level}`);
-        }
-
-        document.getElementById('sp:load').innerHTML = (`${text2}`);
+        document.getElementById('sp:level/main').innerHTML = text_main;
+        document.getElementById('sp:load').innerHTML = text_load;
     });
 </script>
