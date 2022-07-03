@@ -1,0 +1,10 @@
+{
+    "main": [
+        { "text": "Home", "icon": "home", "link": "/" },
+        { "text": "Rates", "icon": "star", "link": "/rates" }
+    ],
+    "404": [
+        { "text": "Back", "type": "icon", "icon": "arrow-left", "link": "/" },
+        { "text": "uh oh", "icon": "home", "link": "/" }
+    ]
+}

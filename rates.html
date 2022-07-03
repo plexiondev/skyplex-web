@@ -42,7 +42,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 </head>
-<body class="dark" style="--accent-page: var(--skyplex);">
+<body class="dark" style="--accent-page: var(--skyplex);" page-location="main" page-marker=1>
     <div class="logs" id="log_parent"></div>
     <script src="https://plexion.dev/js/logging.js"></script>
     <div class="windows" id="window_parent"></div>
@@ -50,20 +50,8 @@
     <!--<div class="snow-stuff" id="snowflakeContainer">
         <span class="snow snow-stuff"></span>
     </div> End Christmas 2021 -->
-    <header class="dark">
-        <a class="brand" href="/">
-            <h1 translate="no">plexion</h1>
-        </a>
-        <span class="links">
-            <a href="/" aria-label="Home"><i class="icon w-20" stroke-width="2.5" data-feather="home"></i><i class="text">Home<span class="bar"></span></i></a>
-            <a href="/rates" class="focus" aria-label="Rates"><i class="icon w-20" stroke-width="2.5" data-feather="star"></i><i class="text">Rates<span class="bar"></span></i></a>
-        </span>
-        <span class="menu">
-            <span class="dropdown-wrap">
-                <a href="https://github.com/plexiondev/skyplex" aria-label="View Source" class="option-open"><i class="icon w-28" data-feather="external-link"></i></a>
-            </span>
-        </span>
-    </header>
+    <header id="header"></header>
+    <script src="/js/header.js"></script>
     <div class="bg" style="background-image: url(/wall/mine.png);">
         <section class="min header padding center" style="padding-top: 130px; padding-bottom: 130px;">
             <div class="bg-dark lib-grad"></div>
