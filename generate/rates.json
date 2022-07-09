@@ -1,10 +1,10 @@
 {
     "mine": [
-        { "name": "cobblestone", "level": 1 },
-        { "name": "coal", "level": 2 },
-        { "name": "raw_iron", "level": 3 },
-        { "name": "raw_gold", "level": 3 },
-        { "name": "diamond", "level": 4 },
+        { "name": "cobblestone", "level": 5 },
+        { "name": "coal", "level": 10 },
+        { "name": "raw_iron", "level": 20 },
+        { "name": "raw_gold", "level": 30 },
+        { "name": "diamond", "level": 50 },
         { "name": "lapis_lazuli", "level": 0 },
         { "name": "redstone", "level": 0 }
     ],
