@@ -159,7 +159,7 @@
                 "count": 1,
                 "nbt": {
                     "name": "Help the Baker",
-                    "description": [{"text":"All my furnaces are out of fuel! Help retrieve some","color":"gray","italic":false},{"text":"coal to refuel the furnaces."}],
+                    "description": [{"text":"All my furnaces are out of fuel!","color":"gray","italic":false}],
                     "quest_id": 5,
                     "criteria": {
                         "coal": {
