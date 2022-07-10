@@ -2,6 +2,7 @@
 <head>
     <link rel="stylesheet" href="https://plexion.dev/css/reset.css">
     <link rel="stylesheet" href="https://plexion.dev/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,19 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <title>Skyplex generate</title>
+    <title>Skyplex rates generate</title>
 </head>
-<br><label class="over">sp:level/main</label>
-<div id="sp:level/main"></div>
-<hr>
-<br><label class="over">sp:load</label>
-<div id="sp:load"></div>
+<body class="dark" style="--accent-page: var(--skyplex);">
+    <section class="download-steps header-bar" style="top: initial; height: 86px;">
+        <span class="logo"><h5>Rates generator</h5></span>
+    </section>
+    <section style="padding: 15px var(--padding-min);">
+        <br><label class="overl">sp:level/main</label>
+        <div id="sp:level/main"></div>
+        <br><label class="overl">sp:load</label>
+        <div id="sp:load"></div>
+    </section>
+</body>
 <script>
     const headers = {
         'mine': 'mining',
