@@ -183,6 +183,7 @@
                 }
             },
             "quests": ["baker"]
-        }
+        },
+        { "buy": { "id": "wheat", "count": 20 }, "sell": { "id": "gold_nugget", "count": 1 }, "quests": ["baker"] }
     ]
 }
