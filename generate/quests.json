@@ -1,7 +1,8 @@
 {
     "quests": [
         { "id": "test", "name": "Test quest", "profession": "blacksmith" },
-        { "id": "oscar", "name": "Oscar", "profession": "blacksmith" }
+        { "id": "oscar", "name": "Oscar", "profession": "blacksmith" },
+        { "id": "baker", "name": "Baker", "profession": "blacksmith" }
     ],
     "test": [
         {
@@ -150,6 +151,38 @@
                 }
             },
             "quests": ["oscar"]
+        },
+        {
+            "buy": { "id": "emerald", "count": 1 },
+            "sell": {
+                "id": "nether_star",
+                "count": 1,
+                "nbt": {
+                    "name": "Help the Baker",
+                    "description": [{"text":"All my furnaces are out of fuel! Help retrieve some","color":"gray","italic":false},{"text":"coal to refuel the furnaces."}],
+                    "quest_id": 4,
+                    "criteria": {
+                        "coal": {
+                            "trigger": "minecraft:inventory_changed",
+                            "description": "Retrieve 32 Coal",
+                            "conditions": {
+                                "items": [
+                                    {
+                                        "items": [
+                                            "minecraft:coal"
+                                        ],
+                                        "count": {
+                                            "min": 32
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "rewards": [{"id":"bread","count":32},{"id":"gold_nugget","count":10},{"id":"emerald","count":1}]
+                }
+            },
+            "quests": ["baker"]
         }
     ]
 }
