@@ -261,12 +261,12 @@ function ParseNBT(type,nbt,n,i) {
             Quest = data[n][i][`${type}`].nbt.quest_id;
             nbt.QuestID = data[n][i][`${type}`].nbt.quest_id;
             // generic quest list
-            QuestGeneric = `## quest ${data[n][i][`${type}`].nbt.quest_id}
+            QuestGeneric = `## quest ${data[n][i][`${type}`].nbt.quest_id} (${data[n][i][`${type}`].nbt.name})
             <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id} 1
             <br>execute if score @s quest.holding matches 1.. if score @s quest.holding_id matches ${data[n][i][`${type}`].nbt.quest_id} unless score @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen matches 1.. run function sp:system/quest/${data[n][i][`${type}`].nbt.quest_id}/start`;
             
             // start
-            QuestStart = `## quest ${data[n][i][`${type}`].nbt.quest_id}
+            QuestStart = `## quest ${data[n][i][`${type}`].nbt.quest_id} (${data[n][i][`${type}`].nbt.name})
             <br># stats
             <br>clear @s ${data[n][i][`${type}`].id}{QuestID:${data[n][i][`${type}`].nbt.quest_id}} 1
             <br>scoreboard players set @s quest_${data[n][i][`${type}`].nbt.quest_id}.seen 1
@@ -283,7 +283,7 @@ function ParseNBT(type,nbt,n,i) {
             // end
             QuestStart = `${QuestStart}<br>tellraw @s ""<br>`;
 
-            QuestLoad = `## quest ${data[n][i][`${type}`].nbt.quest_id}<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
+            QuestLoad = `## quest ${data[n][i][`${type}`].nbt.quest_id} (${data[n][i][`${type}`].nbt.name})<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id} dummy<br>scoreboard objectives add quest_${data[n][i][`${type}`].nbt.quest_id}.seen dummy`;
         } else if (Property == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') nbt.Enchantments = [];
             Enchantments = data[n][i][`${type}`].nbt.enchants;
@@ -317,10 +317,10 @@ function CreateAdvancement(criteria,QuestID,QuestAdvancement,QuestEndCheck,Quest
     advancement.rewards.function = `sp:system/quest/${QuestID}/end_check`;
 
     QuestAdvancement = `${QuestAdvancement}quest ${QuestID}<br>${JSON.stringify(advancement)}<br><br>`;
-    QuestEndCheck = `${QuestEndCheck}## quest ${QuestID}<br>execute if score @s quest_${QuestID} matches 1.. run function sp:system/quest/${QuestID}/end<br>execute unless score @s quest_${QuestID} matches 1.. run advancement revoke @s only sp:quest_${QuestID}<br><br>`;
+    QuestEndCheck = `${QuestEndCheck}## quest ${QuestID} (${item.nbt.name})<br>execute if score @s quest_${QuestID} matches 1.. run function sp:system/quest/${QuestID}/end<br>execute unless score @s quest_${QuestID} matches 1.. run advancement revoke @s only sp:quest_${QuestID}<br><br>`;
     
     // start
-    QuestEnd = `${QuestEnd}## quest ${QuestID}
+    QuestEnd = `${QuestEnd}## quest ${QuestID} (${item.nbt.name})
     <br>tellraw @s ["",{"text":"[","color":"dark_gray"},{"text":"♦","color":"gold"},{"text":"] ","color":"dark_gray"},{"text":"Quest finished! ","color":"gold"},{"text":"${item.nbt.name}","color":"yellow"},{"text":"\\n\\nRewards:","color":"gold"}]`;
 
     // rewards
