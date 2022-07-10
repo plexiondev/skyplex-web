@@ -9,7 +9,7 @@
         { "name": "redstone", "level": 0 }
     ],
     "fish": [
-        { "name": "catch", "level": 1 }
+        { "name": "catch", "level": 10 }
     ],
     "farm": [
         { "name": "wheat", "level": 1 }
