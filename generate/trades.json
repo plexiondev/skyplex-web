@@ -8,11 +8,11 @@
         { "id": "test", "name": "Tester", "profession": "blacksmith" }
     ],
     "mine": [
-        { "buy": { "id": "cobblestone", "count": 5 }, "sell": { "id": "gold_nugget", "count": 1 }, "trades": ["miner","deep_miner"] },
-        { "buy": { "id": "coal", "count": 2 }, "sell": { "id": "gold_nugget", "count": 1 }, "trades": ["miner","deep_miner"] },
-        { "buy": { "id": "raw_iron", "count": 1 }, "sell": { "id": "gold_nugget", "count": 2 }, "trades": ["miner","deep_miner"] },
-        { "buy": { "id": "raw_gold", "count": 1 }, "sell": { "id": "gold_nugget", "count": 2 }, "trades": ["miner","deep_miner"] },
-        { "buy": { "id": "diamond", "count": 1 }, "sell": { "id": "gold_nugget", "count": 10 }, "trades": ["deep_miner"] },
+        { "buy": { "id": "cobblestone", "count": 2 }, "sell": { "id": "gold_nugget", "count": 1 }, "trades": ["miner","deep_miner"] },
+        { "buy": { "id": "coal", "count": 1 }, "sell": { "id": "gold_nugget", "count": 2 }, "trades": ["miner","deep_miner"] },
+        { "buy": { "id": "raw_iron", "count": 1 }, "sell": { "id": "gold_nugget", "count": 5 }, "trades": ["miner","deep_miner"] },
+        { "buy": { "id": "raw_gold", "count": 1 }, "sell": { "id": "gold_nugget", "count": 12 }, "trades": ["miner","deep_miner"] },
+        { "buy": { "id": "diamond", "count": 1 }, "sell": { "id": "gold_nugget", "count": 25 }, "trades": ["deep_miner"] },
         { "buy": { "id": "lapis_lazuli", "count": 1 }, "sell": { "id": "gold_nugget", "count": 1 }, "trades": ["deep_miner"] },
         { "buy": { "id": "redstone", "count": 1 }, "sell": { "id": "gold_nugget", "count": 1 }, "trades": ["deep_miner"] }
     ],
