@@ -17,14 +17,20 @@
 <br><label class="over">sp:load</label>
 <div id="sp:load"></div>
 <script>
+    const headers = {
+        'mine': 'mining',
+        'fish': 'fishing',
+        'farm': 'farming'
+    }
+
     $.get('rates.json',function(data) {
         // run through data
         let text_main = ''; // sp:level/main
         let text_load = ''; // sp:load
 
         for (let n in data) {
-            text_main = `${text_main}<br><br># ${n}`;
-            text_load = `${text_load}<br><br># ${n}`;
+            text_main = `${text_main}<br>## ${headers[n]}`;
+            text_load = `${text_load}<br>## ${headers[n]}`;
 
             for (let i in data[n]) {
                 text_main = `${text_main}<br>execute if score @s sp${n}.${data[n][i].name} matches 1.. run scoreboard players operation @s lvl.${n}.progress += ${n}.${data[n][i].name} lvl.rates`;
