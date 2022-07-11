@@ -1,8 +1,8 @@
 {
     "quests": [
-        { "id": "test", "name": "Test quest", "profession": "blacksmith" },
-        { "id": "oscar", "name": "Oscar", "profession": "blacksmith" },
-        { "id": "baker", "name": "Baker", "profession": "blacksmith" }
+        { "id": "test", "name": "Test quest" },
+        { "id": "oscar", "name": "Oscar" },
+        { "id": "baker", "name": "Baker" }
     ],
     "baker": [
         { "buy": { "id": "wheat", "count": 20 }, "sell": { "id": "gold_nugget", "count": 1 }, "quests": ["baker"] },
