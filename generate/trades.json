@@ -3,7 +3,7 @@
         { "id": "miner", "name": "Miner", "profession": "blacksmith" },
         { "id": "miner_tools", "name": "Tools", "profession": "toolsmith" },
         { "id": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
-        { "id": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" },
+        { "id": "ticketmaster", "name": "Ticket Master" },
         { "id": "fisherman", "name": "Fisherman", "profession": "fisherman" },
         { "id": "banker", "name": "Banker" },
         { "id": "test", "name": "Tester", "profession": "blacksmith" }
@@ -20,9 +20,6 @@
     "miner_tools": [
         { "buy": { "id": "gold_nugget", "count": 3 }, "sell": { "id": "wooden_pickaxe", "count": 1, "nbt": { "name": "Placeholder Pickaxe", "model": 19160001 } }, "trades": ["miner_tools"] }
     ],
-    "deep_mines_unlock": [
-        { "buy": { "id": "raw_gold", "count": 32 }, "sell": { "id": "paper", "count": 1, "nbt": { "name": "Deep Mines", "description": "Unlocks the Deep Mines (permanent)", "model": 19160002 } }, "trades": ["deep_mines_unlock"] }
-    ],
     "fisherman": [
         { "buy": { "id": "cod", "count": 1 }, "sell": { "id": "gold_nugget", "count": 2 }, "trades": ["fisherman"] },
         { "buy": { "id": "salmon", "count": 1 }, "sell": { "id": "gold_nugget", "count": 2 }, "trades": ["fisherman"] },
@@ -34,7 +31,7 @@
         { "buy": { "id": "gold_ingot", "count": 1 }, "sell": { "id": "gold_nugget", "count": 64 }, "trades": ["banker"] }
     ],
     "ticketmaster": [
-
+        { "buy": { "id": "raw_gold", "count": 32 }, "sell": { "id": "paper", "count": 1, "nbt": { "name": "Deep Mines", "description": "Unlocks the Deep Mines (permanent)", "model": 19160002 } }, "trades": ["ticketmaster"] }
     ],
     "test": [
         { "buy": { "id": "stick", "count": 1 }, "sell": { "id": "gold_nugget", "count": 5 }, "trades": ["test"] },
