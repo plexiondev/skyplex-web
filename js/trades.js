@@ -158,7 +158,7 @@ function generate(trade) {
                     em_record.innerHTML = (`
                     <th class="icon${buy_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].buy.id}.png"</div></th>
                     <th class="name has-tooltip${buy_enchant}" title="${buy_description} ${format_buy_enchants}">${buy_name}<label class="count">${data[n][i].buy.count}</label></th>
-                    <th class="arrow-get"><i class="icon w-24" data-feather="arrow-right"></i></th>
+                    <th class="arrow-get"><i class="icon w-20" data-feather="arrow-right"></i></th>
                     <th class="icon${sell_enchant}"><div class="headline-icon min" style="padding: 0; height: auto; position: relative; top: 10px;"><img src="https://plexion.dev/img/item/${data[n][i].sell.id}.png"</div></th>
                     <th class="name has-tooltip${sell_enchant}" title="${sell_description} ${format_sell_enchants}">${sell_name}<label class="count">${data[n][i].sell.count}</label></th>
                     `);
