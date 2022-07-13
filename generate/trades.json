@@ -31,7 +31,7 @@
         { "buy": { "id": "gold_ingot", "count": 1 }, "sell": { "id": "gold_nugget", "count": 64 }, "trades": ["banker"] }
     ],
     "ticketmaster": [
-        { "buy": { "id": "raw_gold", "count": 32 }, "sell": { "id": "paper", "count": 1, "nbt": { "name": "Deep Mines", "description": "Unlocks the Deep Mines (permanent)", "model": 19160002 } }, "trades": ["ticketmaster"] }
+        { "buy": { "id": "raw_gold", "count": 32 }, "sell": { "id": "paper", "count": 1, "nbt": { "name": "Deep Mines", "description": "Unlocks the Deep Mines (permanent)", "model": 19160002, "id": "deep_mines_ticket" } }, "trades": ["ticketmaster"] }
     ],
     "test": [
         { "buy": { "id": "stick", "count": 1 }, "sell": { "id": "gold_nugget", "count": 5 }, "trades": ["test"] },
