@@ -5,6 +5,7 @@
         { "id": "deep_miner", "name": "Deep Miner", "profession": "blacksmith" },
         { "id": "deep_mines_unlock", "name": "Deep Miner", "profession": "blacksmith" },
         { "id": "fisherman", "name": "Fisherman", "profession": "fisherman" },
+        { "id": "banker", "name": "Banker" },
         { "id": "test", "name": "Tester", "profession": "blacksmith" }
     ],
     "mine": [
@@ -27,6 +28,13 @@
         { "buy": { "id": "salmon", "count": 1 }, "sell": { "id": "gold_nugget", "count": 2 }, "trades": ["fisherman"] },
         { "buy": { "id": "pufferfish", "count": 1 }, "sell": { "id": "gold_nugget", "count": 1 }, "trades": ["fisherman"] },
         { "buy": { "id": "tropical_fish", "count": 1 }, "sell": { "id": "gold_nugget", "count": 12 }, "trades": ["fisherman"] }
+    ],
+    "banker": [
+        { "buy": { "id": "gold_nugget", "count": 64 }, "sell": { "id": "gold_ingot", "count": 1 }, "trades": ["banker"] },
+        { "buy": { "id": "gold_ingot", "count": 1 }, "sell": { "id": "gold_nugget", "count": 64 }, "trades": ["banker"] }
+    ],
+    "ticketmaster": [
+
     ],
     "test": [
         { "buy": { "id": "stick", "count": 1 }, "sell": { "id": "gold_nugget", "count": 5 }, "trades": ["test"] },
