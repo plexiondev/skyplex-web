@@ -88,6 +88,7 @@ function generate(trade) {
                     var buy_enchants= [];
                     var buy_damage = 0;
                     var buy_unbreakable = 0;
+                    var buy_id = '';
                     // sell
                     var sell_name = data[n][i].sell.id;
                     var sell_description = '';
@@ -95,6 +96,7 @@ function generate(trade) {
                     var sell_enchants = [];
                     var sell_damage = 0;
                     var sell_unbreakable = 0;
+                    var sell_id = '';
 
                     // advanced nbt
                     try {
@@ -110,6 +112,7 @@ function generate(trade) {
                         if (buy_data[4] != '') { buy_enchants = buy_data[4] }
                         if (buy_data[5] != 0) { buy_damage = buy_data[5] }
                         if (buy_data[6] != 0) { buy_unbreakable = buy_data[6] }
+                        if (buy_data[7] != '') { buy_id = buy_data[7] }
 
                         if (sell_data[1] != '') { sell_name = sell_data[1] }
                         if (sell_data[2] != '') { sell_description = sell_data[2] }
@@ -117,6 +120,7 @@ function generate(trade) {
                         if (sell_data[4] != '') { sell_enchants = sell_data[4] }
                         if (sell_data[5] != 0) { sell_damage = sell_data[5] }
                         if (sell_data[6] != 0) { sell_unbreakable = sell_data[6] }
+                        if (sell_data[7] != '') { sell_id = sell_data[7] }
                     } catch(error) { }
 
                     // buy & sell data
@@ -182,6 +186,7 @@ function nbt(type,nbt,n,i) {
     let custom_name = '';
     let custom_description = '';
     let custom_model = '';
+    let custom_id = '';
     let custom_enchants = [];
     let damage = 0;
     let unbreakable = 0;
@@ -198,6 +203,9 @@ function nbt(type,nbt,n,i) {
         } else if (x == 'model') {
             custom_model = data[n][i][`${type}`].nbt.model;
             nbt.CustomModelData = data[n][i][`${type}`].nbt.model;
+        } else if (x == 'id') {
+            custom_id = data[n][i][`${type}`].nbt.id;
+            nbt.CustomItemID = data[n][i][`${type}`].nbt.id;
         } else if (x == 'enchants') {
             if (typeof nbt.Enchantments == 'undefined') { nbt.Enchantments = [] }
             custom_enchants = data[n][i][`${type}`].nbt.enchants;
@@ -213,7 +221,7 @@ function nbt(type,nbt,n,i) {
         }
     }
 
-    return [nbt,custom_name,custom_description,custom_model,custom_enchants,damage,unbreakable];
+    return [nbt,custom_name,custom_description,custom_model,custom_enchants,damage,unbreakable,custom_id];
 }
 
 // copy
